@@ -1,0 +1,34 @@
+.sidenav-container {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+mat-sidenav-content > mat-toolbar {
+  height: 64px;
+}
+
+.sidenav {
+  width: 200px;
+  box-shadow: 3px 0 6px rgba(0,0,0,.24);
+ 
+}
+
+.content{
+   margin-top: 15px;
+   height: calc(100% - 79px);
+}
+
+
+a,a:hover,a:click, a:visited{
+  border:none;
+  outline:none;
+  text-decoration:none;
+}
+
+mat-sidenav-content > mat-toolbar  a{
+  color: #fff !important;
+}
