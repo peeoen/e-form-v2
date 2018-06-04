@@ -4,8 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './modules/material.module';
+import { MaterialModule, NGXSModule } from './modules/index';
 import { NavbarComponent } from './navbar/navbar.component';
+
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    NGXSModule
+    // NgxsModule.forRoot([ReportsState]),
   ],
   providers: [],
   bootstrap: [AppComponent]
