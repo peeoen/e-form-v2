@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { NgxsModule } from '@ngxs/store';
-import { ReportsState } from '../states/report.state';
+import { ReportsState } from '../states/index';
 
 @NgModule({
     imports: [
-        NgxsModule.forRoot([ReportsState])
+        NgxsModule.forRoot([
+            ReportsState
+        ])
     ],
     exports: [
         NgxsModule
