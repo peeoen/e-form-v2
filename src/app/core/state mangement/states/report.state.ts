@@ -9,9 +9,14 @@ export interface ReportStateModel {
     description?: string;
 }
 
+const initial: ReportStateModel = {
+    reportName: 'report name',
+    active: true
+};
+
 @State<ReportStateModel>({
     name: 'reports',
-    defaults: null,
+    defaults: initial,
 })
 export class ReportsState {
 

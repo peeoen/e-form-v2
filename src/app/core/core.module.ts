@@ -1,21 +1,18 @@
-import { MaterialModule } from './material/index';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { NavbarComponent } from './navbar/navbar.component';
+import { MaterialModule } from './material/index';
 import { NGXSModule } from './state mangement/index';
+
 @NgModule({
-    declarations: [
-        NavbarComponent
-    ],
-    exports: [
-        NavbarComponent,
-    ],
     imports: [
         CommonModule,
         NGXSModule,
         MaterialModule,
         HttpClientModule,
+    ],
+    exports: [
+        MaterialModule
     ],
     providers: [],
 })
