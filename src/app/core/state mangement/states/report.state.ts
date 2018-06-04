@@ -1,5 +1,5 @@
 import { State } from '@ngxs/store';
-import { Page } from '../models/page';
+import { Page } from '../../models/page';
 
 export interface ReportStateModel { 
     reportName: string;
