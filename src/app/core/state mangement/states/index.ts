@@ -1,1 +1,1 @@
-export { ReportsState } from './report.state';
+export * from './report.state';

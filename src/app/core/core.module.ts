@@ -1,26 +1,21 @@
+import { MaterialModule } from './material/index';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxsModule } from '@ngxs/store';
-import { MaterialModule } from './../modules/material.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ReportsState } from './state mangement/states';
-
+import { NGXSModule } from './state mangement/index';
 @NgModule({
     declarations: [
         NavbarComponent
     ],
     exports: [
-        NavbarComponent
+        NavbarComponent,
     ],
     imports: [
         CommonModule,
-        NgxsModule.forRoot([
-            ReportsState
-        ]),
-        FormsModule,
-        ReactiveFormsModule,
-        MaterialModule
+        NGXSModule,
+        MaterialModule,
+        HttpClientModule,
     ],
     providers: [],
 })

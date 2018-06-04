@@ -1,5 +1,5 @@
 import { State } from '@ngxs/store';
-import { Page } from '../../models/page';
+import { Page } from '../../models/index';
 
 export interface ReportStateModel { 
     reportName: string;
@@ -8,8 +8,6 @@ export interface ReportStateModel {
     imagePreview?: any;
     description?: string;
 }
-
-
 
 @State<ReportStateModel>({
     name: 'reports',
