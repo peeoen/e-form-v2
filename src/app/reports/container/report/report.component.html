@@ -24,7 +24,7 @@
                 </p>
               </mat-card-content>
               <mat-card-actions align="end">
-                <button mat-raised-button color="primary">EDIT</button>
+                <button mat-raised-button color="primary"   [routerLink]="['/report-form', report.id]">EDIT</button>
                 <button mat-raised-button>DELETE</button>
               </mat-card-actions>
             </mat-card>

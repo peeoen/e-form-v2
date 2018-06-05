@@ -1,0 +1,8 @@
+<div class="control-panel">
+  <p class="title">Controls</p>
+  <div class="row no-gutters">
+    <div class="col-6 no-gutters control" *ngFor="let control of (controls$  | async)">
+      <app-control [title]="control.title" [icon]="control.icon"></app-control>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<div *ngIf="!reportNotFound" class="container-fluid">
+  <div class="row report-form">
+    <div class="control-panel">
+      <app-control-list></app-control-list>
+    </div>
+    <div class="form-panel">
+      template
+    </div>
+    <div class="page-panel">
+      <app-page-list></app-page-list>
+    </div>
+  </div>
+</div>
+
+<h1 *ngIf="reportNotFound">
+  Report Not Found
+</h1>

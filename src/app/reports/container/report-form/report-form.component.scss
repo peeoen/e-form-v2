@@ -1,0 +1,21 @@
+.container-fluid {
+    // min-width: 1200px;
+    .report-form {
+        width: 1300px;
+        margin: 0 auto;
+
+        .control-panel,.page-panel,.form-panel {
+            padding: 0px 15px;
+        }
+
+        .control-panel{
+            width: 20%;
+        }
+        .form-panel {
+            width: 60%;
+         }
+        .page-panel{
+            width: 20%;
+        }
+    }
+}

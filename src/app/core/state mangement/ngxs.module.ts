@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { ReportsState } from './states/index';
+import { ControlsState, ReportsState } from './states/index';
 
 @NgModule({
     imports: [
         NgxsModule.forRoot([
-            ReportsState
+            ReportsState,
+            ControlsState
         ]),
         NgxsReduxDevtoolsPluginModule.forRoot()
     ],

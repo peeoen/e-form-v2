@@ -18,8 +18,8 @@ mat-sidenav-content > mat-toolbar {
 }
 
 .content{
-   margin-top: 15px;
-   height: calc(100% - 79px);
+   margin-top: 94px;
+   height: calc(100% - 94px);
 }
 
 
@@ -31,4 +31,12 @@ a,a:hover,a:click, a:visited{
 
 mat-sidenav-content > mat-toolbar  a{
   color: #fff !important;
+}
+
+.mat-toolbar.mat-primary{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 9;
 }

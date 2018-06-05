@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ReportModule } from './reports/report/report.module';
+import { ReportsModule } from './reports/reports.module';
 import { SharedModule } from './share/share.module';
 
 
@@ -20,7 +20,7 @@ import { SharedModule } from './share/share.module';
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
-    ReportModule,
+    ReportsModule,
     AppRoutingModule
   ],
   providers: [],
