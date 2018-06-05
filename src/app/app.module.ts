@@ -1,4 +1,3 @@
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,18 +9,21 @@ import { ReportsModule } from './reports/reports.module';
 import { SharedModule } from './share/share.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    CoreModule,
+CoreModule,
     SharedModule,
     ReportsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [AppComponent]

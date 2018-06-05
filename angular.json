@@ -9,9 +9,9 @@
       "projectType": "application",
       "prefix": "app",
       "schematics": {
-        "@schematics/angular:component": {                                                               
-    "styleext": "scss"                                                                             
-  }  
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
       },
       "architect": {
         "build": {
@@ -32,7 +32,9 @@
               },
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jspdf/dist/jspdf.min.js" 
+            ]
           },
           "configurations": {
             "production": {
@@ -84,7 +86,9 @@
               },
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/jspdf/dist/jspdf.min.js" 
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"

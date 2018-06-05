@@ -1,0 +1,25 @@
+.template {
+    height: 96%;
+    margin: 0 auto;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.14), 0 7px 8px rgba(0, 0, 0, 0.28) !important;
+}
+
+.form-container{
+    position: absolute;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.14), 0 7px 8px rgba(0, 0, 0, 0.28) !important;
+    z-index: 2;
+}
+
+
+.report-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 15px;
+}
+
+
+.test-image {
+    position: absolute;
+    top: 300px;
+    left: 100px;
+}

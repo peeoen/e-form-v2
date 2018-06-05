@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +7,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  pdfSrc: string;
+
+  constructor() {
+
+  }
 }

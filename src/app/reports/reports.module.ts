@@ -1,14 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SharedModule } from '../share/share.module';
+import { ControlComponent, ControlListComponent, PageComponent, PageListComponent, ReportBuilderComponent } from './component/index';
 import { ReportFormComponent } from './container/report-form/report-form.component';
 import { ReportComponent } from './container/report/report.component';
-import { ControlListComponent } from './component/control-list/control-list.component';
-import { ControlComponent } from './component/control/control.component';
-import { ReportBuilderComponent } from './component/report-builder/report-builder.component';
-import { PageListComponent } from './component/page-list/page-list.component';
-import { PageComponent } from './component/page/page.component';
+import { ReportRoutingModule } from './report-routing.module';
 
 
 const components = [
@@ -16,22 +13,24 @@ const components = [
     ReportFormComponent,
     ControlListComponent,
     ControlComponent,
+    ReportBuilderComponent,
+    PageListComponent,
+    PageComponent,
 ];
 
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule,
-        SharedModule
-    ],
-    exports: [
-        ...components
+        SharedModule,
+        PdfViewerModule,
+        ReportRoutingModule,
+
     ],
     declarations: [
         ...components,
-        ReportBuilderComponent,
-        PageListComponent,
-        PageComponent,
+    ],
+    exports: [
+        // ...components,
     ],
     providers: [],
 })

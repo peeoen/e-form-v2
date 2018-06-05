@@ -3,13 +3,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { SharedModule } from '../share/share.module';
 import { NGXSModule } from './state mangement/index';
-
+import { RouterModule, Routes } from '@angular/router';
 
 @NgModule({
     imports: [
         CommonModule,
         NGXSModule,
         HttpClientModule,
+        RouterModule,
         SharedModule,
     ],
     exports: [

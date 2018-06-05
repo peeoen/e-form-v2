@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ControlDirective } from './directives/control-host.directive';
 import { MaterialModule } from './material/index';
 
 @NgModule({
@@ -10,14 +11,16 @@ import { MaterialModule } from './material/index';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
   ],
-  declarations: [],
+  declarations: [
+    ControlDirective
+  ],
   exports: [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
   ]
 })
 export class SharedModule { }

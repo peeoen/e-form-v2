@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import * as jsPDF from 'jspdf';
+import { ControlDirective } from '../../../share/directives/control-host.directive';
 
 @Component({
   selector: 'app-report-builder',
@@ -6,10 +8,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./report-builder.component.scss']
 })
 export class ReportBuilderComponent implements OnInit {
+  screen = {
+    width: null,
+    height: null
+  };
+  pdfSrc: string;
+  @ViewChild(ControlDirective) controlHost: ControlDirective;
 
-  constructor() { }
+  constructor() {
+
+   }
 
   ngOnInit() {
+    const doc = new jsPDF();
+    doc.text(20, 20, 'test');
+    const uri = doc.output('datauristring');
+    console.log(uri);
+    console.log(doc);
+    
+    this.pdfSrc = uri;
+    // const doc = new jsPDF();
+    // const uri = doc.output('datauristring');
+    // this.pdfSrc = uri;
+  }
+
+  
+  pageRendered(e: CustomEvent) {
+    // console.log('test');
+    // const el = document.getElementsByClassName('pdfViewer')[0];
+    // console.log(el);
+    // this.screen.width = el.clientWidth + 'px';
+    // this.screen.height = el.clientHeight + 'px';
   }
 
 }

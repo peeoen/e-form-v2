@@ -1,3 +1,14 @@
-<p>
-  report-builder works!
-</p>
+<!-- <div class="report-container">
+  <div class="form-container"
+   #formContainer 
+   [ngStyle]="{'height': screen?.height, 'width': screen?.width}">
+   <ng-template control-host></ng-template>
+  </div>
+  <pdf-viewer [src]="pdfSrc" 
+              [render-text]="true"
+              style="display: block;"
+  ></pdf-viewer>
+</div> -->
+
+
+<pdf-viewer id="viewer" [autoresize]="true" [src]="pdfSrc" [render-text]="true" style="display: block;"></pdf-viewer> 
