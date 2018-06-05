@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ReportModule } from './reports/report/report.module';
+import { SharedModule } from './share/share.module';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ReportModule } from './reports/report/report.module';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
+    SharedModule,
     ReportModule,
     AppRoutingModule
   ],

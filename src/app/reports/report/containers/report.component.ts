@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { ReportsState } from '../../../core/state mangement/states';
 
 @Component({
   selector: 'app-report',
@@ -7,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportComponent implements OnInit {
 
+  @Select(ReportsState) reports$: Observable<any>;
   constructor() { }
 
   ngOnInit() {

@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { MaterialModule } from './material/index';
+import { SharedModule } from '../share/share.module';
 import { NGXSModule } from './state mangement/index';
+
 
 @NgModule({
     imports: [
         CommonModule,
         NGXSModule,
-        MaterialModule,
         HttpClientModule,
+        SharedModule,
     ],
     exports: [
-        MaterialModule
     ],
     providers: [],
 })

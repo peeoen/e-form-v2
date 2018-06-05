@@ -1,0 +1,61 @@
+.example-card {
+    max-width: 400px;
+    min-height: 100%;
+    min-width: 100%;
+    cursor: pointer;
+}
+
+.example-card:hover {
+    border: 2px solid darkgray;
+    /* double border */
+}
+
+.description {
+    min-height: 60px;
+}
+
+.img-center {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-weight: bold;
+    display: inline;
+    float: left;
+}
+
+.add-card {
+    float: right;
+}
+
+.add-card>mat-icon {
+    color: royalblue;
+    font-size: 41px;
+    margin-right: 19px;
+    cursor: pointer;
+}
+
+mat-card-title {
+    font-weight: bold;
+}
+
+mat-card-content > p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    /* autoprefixer: off */
+    -webkit-box-orient: vertical;
+    /* autoprefixer: on */
+}
+
+.image-preview {
+    object-fit: none;
+    height: 150px;
+}

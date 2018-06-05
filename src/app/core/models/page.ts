@@ -1,8 +1,11 @@
 import { Control } from './control';
 
-export interface Page { 
+export class Page { 
     pageNumber: number;
-    title: string;
     imagePreview?: any;
     controls?: Control[];
+
+    constructor(pageNumber: number) {
+        this.pageNumber = pageNumber;
+    }
 }

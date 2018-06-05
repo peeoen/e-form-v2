@@ -1,3 +1,36 @@
-<p>
-  report works!
-</p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <h4 class="title">
+          Reports
+        </h4>
+        <span class="add-card">
+            <mat-icon>note_add</mat-icon>
+        </span>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <div class="box col-12 col-sm-6 col-lg-3" *ngFor="let report of (reports$ | async)">
+            <mat-card class="example-card">
+              <mat-card-header>
+                <mat-card-title>{{report.reportName}}</mat-card-title>
+              </mat-card-header>
+              <div class="img-center">
+                <img class="image-preview" mat-card-image [src]="report.imagePreview" alt="Photo of a Shiba Inu">
+              </div>
+              <mat-card-content>
+                <p class="description">
+                    {{report.description}}
+                </p>
+              </mat-card-content>
+              <mat-card-actions align="end">
+                <button mat-raised-button color="primary">EDIT</button>
+                <button mat-raised-button>DELETE</button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ reports$ | async | json}}
