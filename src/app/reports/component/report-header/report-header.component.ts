@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DndDropEvent } from 'ngx-drag-drop';
 
 @Component({
   selector: 'app-report-header',
@@ -24,4 +25,9 @@ export class ReportHeaderComponent implements OnInit {
     this.saved.emit();
   }
 
+  onDrop(event: DndDropEvent) {
+  
+    console.log(event);
+    console.log("dropped", JSON.stringify(event, null, 2));
+  }
 }

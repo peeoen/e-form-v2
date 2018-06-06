@@ -24,6 +24,7 @@ import { MaterialModule } from './material/index';
     ReactiveFormsModule,
     PdfViewerModule,
     MaterialModule,
+    ControlDirective,
   ]
 })
 export class SharedModule { }

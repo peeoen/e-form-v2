@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ControlStateModel, ControlsState } from '../../../core/state mangement/states';
 
@@ -12,8 +12,8 @@ export class ControlListComponent implements OnInit {
 
   @Select(ControlsState) controls$: Observable<ControlStateModel>;
 
-  constructor(private store: Store) {
-    const control = this.store.selectSnapshot(ControlsState);
+  constructor() {
+
   }
 
   ngOnInit() {

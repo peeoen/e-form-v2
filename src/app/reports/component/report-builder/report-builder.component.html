@@ -1,5 +1,6 @@
 <div class="report-container">
   <div class="form-container"
+  dndDropzone (dndDrop)="onDrop($event)"
    #formContainer 
    [ngStyle]="{'height': screen?.height, 'width': screen?.width}">
    <ng-template control-host></ng-template>

@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
-// import * as jsPDF from 'jspdf';
 import { Subscription } from 'rxjs';
 import { ReportStateModel } from '../../../core/state mangement/states';
 @Component({
@@ -16,7 +15,7 @@ export class ReportFormComponent implements OnInit, OnDestroy {
   private sub: Subscription;
   pdfSrc: string;
   report: ReportStateModel;
-  
+
   constructor(private route: ActivatedRoute,
     private store: Store) {
 

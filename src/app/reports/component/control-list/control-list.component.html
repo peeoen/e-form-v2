@@ -1,7 +1,9 @@
 <div class="panel">
   <p class="title">Controls</p>
   <div class="row no-gutters control-panel">
-    <div class="col-6 no-gutters" *ngFor="let control of (controls$  | async)">
+    <div class="col-6 no-gutters" 
+    [dndDraggable]="control"
+    *ngFor="let control of (controls$  | async)">
       <app-control [title]="control.title" [icon]="control.icon"></app-control>
     </div>
   </div>
