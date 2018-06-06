@@ -1,48 +1,55 @@
 import { State } from '@ngxs/store';
-
+import { CheckboxComponent, DropdownComponent, ImageComponent, LabelComponent, RadioComponent, TextComponent } from '../../../reports/component/controls/index';
 
 export interface ControlStateModel {
   icon: string;
   title: string;
+  name: string;
   component: any;
 }
 
 const initial: ControlStateModel[] = [
-    {
-        title: 'Label',
-        icon: 'label',
-        component: null
-      },
-      {
-        title: 'Text',
-        icon: 'title',
-        component: null
-      },
-      {
-        title: 'Checkbox',
-        icon: 'check_box',
-        component: null
-      },
-      {
-        title: 'Radio',
-        icon: 'radio_button_checked',
-        component: null
-      },
-      {
-        title: 'Dropdown',
-        icon: 'view_stream',
-        component: null
-      },
-      {
-        title: 'Image',
-        icon: 'broken_image',
-        component: null
-      },
+  {
+    name: 'label',
+    title: 'Label',
+    icon: 'label',
+    component: LabelComponent
+  },
+  {
+    name: 'title',
+    title: 'Text',
+    icon: 'title',
+    component: TextComponent
+  },
+  {
+    name: 'checkbox',
+    title: 'Checkbox',
+    icon: 'check_box',
+    component: CheckboxComponent
+  },
+  {
+    name: 'radio',
+    title: 'Radio',
+    icon: 'radio_button_checked',
+    component: RadioComponent
+  },
+  {
+    name: 'dropdown',
+    title: 'Dropdown',
+    icon: 'view_stream',
+    component: DropdownComponent
+  },
+  {
+    name: 'image',
+    title: 'Image',
+    icon: 'broken_image',
+    component: ImageComponent
+  },
 ];
 
 @State<ControlStateModel[]>({
-    name: 'controls',
-    defaults: initial,
+  name: 'controls',
+  defaults: initial,
 })
 export class ControlsState {
 

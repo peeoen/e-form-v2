@@ -22,15 +22,12 @@ export class ReportBuilderComponent implements OnInit {
     const doc = new jsPDF();
     doc.text(20, 20, 'test');
     const uri = doc.output('arraybuffer');
-    console.log(uri);
     this.pdfSrc = uri;
   }
 
   
   pageRendered(e: CustomEvent) {
-    console.log('test');
     const el = document.getElementsByClassName('pdfViewer')[0];
-    console.log(el);
     this.screen.width = el.clientWidth + 'px';
     this.screen.height = el.clientHeight + 'px';
   }

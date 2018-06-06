@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
-import * as jsPDF from 'jspdf';
+// import * as jsPDF from 'jspdf';
 import { Subscription } from 'rxjs';
 import { ReportStateModel } from '../../../core/state mangement/states';
 @Component({
@@ -19,11 +19,6 @@ export class ReportFormComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private store: Store) {
 
-      const doc = new jsPDF();
-      doc.text(20, 20, 'test');
-      const uri = doc.output('datauristring');
-      console.log(uri);
-      this.pdfSrc = uri;
 
   }
 

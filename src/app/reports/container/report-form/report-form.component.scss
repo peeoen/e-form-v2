@@ -1,29 +1,25 @@
-.container-fluid {
-    // min-width: 1200px;
+.report-form {
     height: 100%;
-    .report-form {
-        width: 1300px;
-        margin: 0 auto;
-        height: 100%;
-        .control-panel,
-        .page-panel,
-        .form-panel {
-            padding: 0px 15px;
+    .control-panel,
+    .page-panel,
+    .form-panel {
+        padding: 0px 15px;
 
-        }
-        .control-panel {
-            width: 20%;
+    }
+    .control-panel {
+        width: 20%;
 
-        }
-        .form-panel {
-            width: 65%;
-            padding-right: 5px;
-            overflow: auto;
-            height: -webkit-fill-available;
-        }
-        .page-panel {
-            width: 15%;
-        }
+    }
+    .form-panel {
+        width: 65%;
+        padding-right: 5px;
+        overflow: auto;
+        // height: -webkit-fill-available;
+        height: 1132px;
+        min-height: 550px;
+    }
+    .page-panel {
+        width: 15%;
     }
 }
 
@@ -38,4 +34,11 @@
 .form-panel::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+
+.content {
+    height: 100%;
+    width: 1200px;
+    position: relative; // **** important use with ng-2-pdf-viwer ****
+    margin-bottom: 30px;
 }
