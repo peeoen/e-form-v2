@@ -18,7 +18,7 @@ initalPage1.imagePreview = 'assets/pages-preview/a4.png';
 
 const initial: ReportStateModel = {
     id: 'e680256707d4',
-    reportName: 'report name',
+    reportName: 'Report 1',
     active: true,
     description: 'The safety of operational requires that all relevant statements are considered and the associated responsibility and accountability for compliance are accepted, either jointly or singly.',
     imagePreview: 'assets/forms-preview/form1.jpg',

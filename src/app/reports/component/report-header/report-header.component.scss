@@ -1,0 +1,17 @@
+.report-name {
+    float: left;
+    width: 50%;
+    font-weight: 400;
+    font-size: 24px;
+    color: midnightblue;
+}
+
+.control {
+    float: left;
+    width: 50%;
+    text-align: right;
+}
+
+.control > button {
+    margin-left: 10px;
+}

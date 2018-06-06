@@ -39,6 +39,13 @@
 .content {
     height: 100%;
     width: 1200px;
+}
+
+.content-header {
+    margin-bottom: 15px;
+}
+
+.content-pdf {
     position: relative; // **** important use with ng-2-pdf-viwer ****
     margin-bottom: 30px;
 }

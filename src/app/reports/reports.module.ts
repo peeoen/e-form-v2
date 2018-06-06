@@ -8,6 +8,7 @@ import { LabelComponent } from './component/controls/label/label.component';
 import { RadioComponent } from './component/controls/radio/radio.component';
 import { TextComponent } from './component/controls/text/text.component';
 import { ControlComponent, ControlListComponent, PageComponent, PageListComponent, ReportBuilderComponent } from './component/index';
+import { ReportHeaderComponent } from './component/report-header/report-header.component';
 import { ReportFormComponent } from './container/report-form/report-form.component';
 import { ReportComponent } from './container/report/report.component';
 import { ReportRoutingModule } from './report-routing.module';
@@ -27,6 +28,7 @@ const components = [
     RadioComponent,
     DropdownComponent,
     ImageComponent,
+    ReportHeaderComponent,
 ];
 
 @NgModule({
@@ -37,6 +39,7 @@ const components = [
     ],
     declarations: [
         ...components,
+
     ],
     exports: [
         ...components,

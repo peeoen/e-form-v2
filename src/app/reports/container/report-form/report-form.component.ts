@@ -15,7 +15,8 @@ export class ReportFormComponent implements OnInit, OnDestroy {
   reportNotFound = false;
   private sub: Subscription;
   pdfSrc: string;
-
+  report: ReportStateModel;
+  
   constructor(private route: ActivatedRoute,
     private store: Store) {
 
@@ -27,6 +28,7 @@ export class ReportFormComponent implements OnInit, OnDestroy {
       this.id = params['id'];
       const reports: ReportStateModel[] = this.store.selectSnapshot(state => state.reports);
       if (this.id && reports.find(x => x.id === this.id)) {
+        this.report = reports[0];
       }
       else {
         this.reportNotFound = true;
@@ -36,5 +38,15 @@ export class ReportFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  addPage() {
+    console.log('add page');
+    
+  }
+
+  savePage() {
+    console.log('save page');
+    
   }
 }
