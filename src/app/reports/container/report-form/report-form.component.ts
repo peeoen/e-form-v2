@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import * as jsPDF from 'jspdf';
@@ -17,17 +17,13 @@ export class ReportFormComponent implements OnInit, OnDestroy {
   pdfSrc: string;
 
   constructor(private route: ActivatedRoute,
-    private store: Store,
-    private cd: ChangeDetectorRef) {
+    private store: Store) {
 
-      setTimeout(() => {
-        const doc = new jsPDF();
-        doc.text(20, 20, 'test');
-        const uri = doc.output('datauristring');
-        console.log(uri);
-        this.pdfSrc = uri;
-        this.cd.markForCheck();
-      }, 1000);
+      const doc = new jsPDF();
+      doc.text(20, 20, 'test');
+      const uri = doc.output('datauristring');
+      console.log(uri);
+      this.pdfSrc = uri;
 
   }
 

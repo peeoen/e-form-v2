@@ -15,31 +15,24 @@ export class ReportBuilderComponent implements OnInit {
   @ViewChild(ControlDirective) controlHost: ControlDirective;
 
   constructor() {
+
+   }
+
+  ngOnInit() {
     const doc = new jsPDF();
     doc.text(20, 20, 'test');
     const uri = doc.output('arraybuffer');
     console.log(uri);
     this.pdfSrc = uri;
-   }
-
-  ngOnInit() {
-    // const doc = new jsPDF();
-    // doc.text(20, 20, 'test');
-    // const uri = doc.output('datauristring');
-    // console.log(uri);
-    // this.pdfSrc = uri;
-    // const doc = new jsPDF();
-    // const uri = doc.output('datauristring');
-    // this.pdfSrc = uri;
   }
 
   
   pageRendered(e: CustomEvent) {
-    // console.log('test');
-    // const el = document.getElementsByClassName('pdfViewer')[0];
-    // console.log(el);
-    // this.screen.width = el.clientWidth + 'px';
-    // this.screen.height = el.clientHeight + 'px';
+    console.log('test');
+    const el = document.getElementsByClassName('pdfViewer')[0];
+    console.log(el);
+    this.screen.width = el.clientWidth + 'px';
+    this.screen.height = el.clientHeight + 'px';
   }
 
 }
