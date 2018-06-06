@@ -1,7 +1,7 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { ControlsState, ControlStateModel } from '../../../core/state mangement/states';
+import { Observable } from 'rxjs';
+import { ControlStateModel, ControlsState } from '../../../core/state mangement/states';
 
 @Component({
   selector: 'app-control-list',
@@ -12,7 +12,9 @@ export class ControlListComponent implements OnInit {
 
   @Select(ControlsState) controls$: Observable<ControlStateModel>;
 
-  constructor() { }
+  constructor() {
+
+   }
 
   ngOnInit() {
   }

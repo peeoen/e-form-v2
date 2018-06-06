@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import { ControlDirective } from '../../../share/directives/control-host.directive';
-
 @Component({
   selector: 'app-report-builder',
   templateUrl: './report-builder.component.html',
@@ -16,17 +15,19 @@ export class ReportBuilderComponent implements OnInit {
   @ViewChild(ControlDirective) controlHost: ControlDirective;
 
   constructor() {
-
+    const doc = new jsPDF();
+    doc.text(20, 20, 'test');
+    const uri = doc.output('arraybuffer');
+    console.log(uri);
+    this.pdfSrc = uri;
    }
 
   ngOnInit() {
-    const doc = new jsPDF();
-    doc.text(20, 20, 'test');
-    const uri = doc.output('datauristring');
-    console.log(uri);
-    console.log(doc);
-    
-    this.pdfSrc = uri;
+    // const doc = new jsPDF();
+    // doc.text(20, 20, 'test');
+    // const uri = doc.output('datauristring');
+    // console.log(uri);
+    // this.pdfSrc = uri;
     // const doc = new jsPDF();
     // const uri = doc.output('datauristring');
     // this.pdfSrc = uri;

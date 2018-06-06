@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ControlDirective } from './directives/control-host.directive';
 import { MaterialModule } from './material/index';
 
@@ -11,6 +12,7 @@ import { MaterialModule } from './material/index';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    PdfViewerModule,
     MaterialModule,
   ],
   declarations: [
@@ -20,6 +22,7 @@ import { MaterialModule } from './material/index';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    PdfViewerModule,
     MaterialModule,
   ]
 })

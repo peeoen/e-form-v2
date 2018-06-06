@@ -1,21 +1,41 @@
 .container-fluid {
     // min-width: 1200px;
+    height: 100%;
     .report-form {
         width: 1300px;
         margin: 0 auto;
-
-        .control-panel,.page-panel,.form-panel {
+        height: 100%;
+        .control-panel,
+        .page-panel,
+        .form-panel {
             padding: 0px 15px;
-        }
 
-        .control-panel{
+        }
+        .control-panel {
             width: 20%;
+
         }
         .form-panel {
-            width: 60%;
-         }
-        .page-panel{
-            width: 20%;
+            width: 65%;
+            padding-right: 5px;
+            overflow: auto;
+            height: -webkit-fill-available;
+        }
+        .page-panel {
+            width: 15%;
         }
     }
+}
+
+.form-panel::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+.form-panel::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.form-panel::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
 }

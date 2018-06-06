@@ -12,7 +12,9 @@ import { Page } from './../../../core/models/page';
 export class PageListComponent implements OnInit {
 
   @Select(ReportsState.pagesActive) pages$:  Observable<Page[]>;
-  constructor() { }
+  constructor() {
+
+   }
 
   ngOnInit() {
   }

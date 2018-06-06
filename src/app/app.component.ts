@@ -8,9 +8,14 @@ import * as jsPDF from 'jspdf';
 })
 export class AppComponent {
 
+  // pdfSrc: string = '/assets/tes.pdf';
   pdfSrc: string;
 
   constructor() {
-
+    const doc = new jsPDF();
+    doc.text(20, 20, 'test');
+    const uri = doc.output('datauristring');
+    console.log(uri);
+    this.pdfSrc = uri;
   }
 }

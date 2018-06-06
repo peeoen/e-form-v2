@@ -1,6 +1,6 @@
 .sidenav-container {
   height: 100%;
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   bottom: 0;
   left: 0;
@@ -20,6 +20,7 @@ mat-sidenav-content > mat-toolbar {
 .content{
    margin-top: 94px;
    height: calc(100% - 94px);
+   padding-bottom: 10px;
 }
 
 
