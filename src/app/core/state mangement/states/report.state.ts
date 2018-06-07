@@ -35,11 +35,12 @@ const initial: ReportStateModel = {
     ],
 })
 export class ReportsState {
-    @Selector() static pagesActive(state: ReportStateModel[]) {
+    @Selector() static pageOfReportSelected(state: ReportStateModel[]) {
         const reportActive = state.find(x => x.active === true);
         if (reportActive) {
             return reportActive.pages;
         }
         return null;
     }
+    
 }

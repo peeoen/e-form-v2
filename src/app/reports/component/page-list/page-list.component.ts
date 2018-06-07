@@ -11,7 +11,7 @@ import { Page } from './../../../core/models/page';
 })
 export class PageListComponent implements OnInit {
 
-  @Select(ReportsState.pagesActive) pages$:  Observable<Page[]>;
+  @Select(ReportsState.pageOfReportSelected) pages$:  Observable<Page[]>;
   constructor() {
 
    }
