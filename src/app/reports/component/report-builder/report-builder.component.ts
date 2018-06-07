@@ -29,7 +29,6 @@ export class ReportBuilderComponent implements OnInit {
     private store: Store,
     private action$: Actions) {
 
-
   }
 
   ngOnInit() {
