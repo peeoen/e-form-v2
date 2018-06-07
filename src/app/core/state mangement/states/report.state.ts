@@ -37,6 +37,7 @@ export class ReportsState {
 
     constructor(private store: Store) { }
 
+
     @Selector() static controlOfPageActive(state: ReportStateModel[]) {
         const reportActive = state.find(r => r.active === true)
         if (reportActive) {

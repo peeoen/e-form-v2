@@ -35,21 +35,29 @@ export class ReportBuilderComponent implements OnInit {
   ngOnInit() {
     this.viewContainerRef = this.controlHost.viewContainerRef;
     this.controls = this.store.selectSnapshot(ControlsState);
-    this.clearTemplate();
-    this.initControl();
+    this.renderPdf();
     
     this.action$.pipe(
       ofActionSuccessful(ChangeActivePage)
     ).subscribe(payload => {
-        this.clearTemplate();
-        this.initControl();
+     this.renderPdf();
     })
   }
 
-  initControl() {
+  renderPdf() {
+    this.clearTemplate();
+    this.iniPDF();
+    this.initControl();
+  }
+
+  iniPDF() {
     const doc = new jsPDF();
     const uri = doc.output('arraybuffer');
     this.pdfSrc = uri;
+
+  }
+
+  initControl() {
     const reports: ReportStateModel[] = this.store.selectSnapshot(state => state.reports);
     const pageActive = reports.find(r => r.active === true).pages.find(p => p.active === true);
     if (pageActive && pageActive.controls) {
