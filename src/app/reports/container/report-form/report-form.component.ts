@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
-import { ReportStateModel } from '../../../core/state mangement/states';
+import { ChangeActivePage, ChangeReportActive, ReportStateModel } from '../../../core/state mangement/states';
+
 @Component({
   selector: 'app-report-form',
   templateUrl: './report-form.component.html',
@@ -26,8 +27,12 @@ export class ReportFormComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.id = params['id'];
       const reports: ReportStateModel[] = this.store.selectSnapshot(state => state.reports);
-      if (this.id && reports.find(x => x.id === this.id)) {
-        this.report = reports[0];
+      const _report = reports.find(x => x.id === this.id)
+
+      if (this.id && _report) {
+        this.report = _report;
+        this.store.dispatch(new ChangeReportActive(this.report.id))
+        this.store.dispatch(new ChangeActivePage(1));
       }
       else {
         this.reportNotFound = true;

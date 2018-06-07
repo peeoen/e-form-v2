@@ -1,7 +1,7 @@
 <div class="panel">
   <p class="title">Pages</p>
   <div class="row no-gutters page-panel">
-    <div class="col-12" *ngFor="let page of (pages$ | async)">
+    <div class="col-12" *ngFor="let page of (pages$ | async)" [ngClass]="{'page-active': page.active}" (click)="changePageActive(page)">
       <app-page [title]="page.pageNumber" [imagePreview]="page.imagePreview"></app-page>
     </div>
   </div>

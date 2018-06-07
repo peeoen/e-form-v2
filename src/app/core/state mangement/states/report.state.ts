@@ -1,40 +1,53 @@
-import { Selector, State } from '@ngxs/store';
+import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import produce from "immer";
+import { Control } from '../../models';
 import { Page } from '../../models/page';
+import { reportsData } from './../data/report.data';
+import { ReportStateModel } from './report.state';
 
 export interface ReportStateModel {
     id: string;
     reportName: string;
-    active: boolean;
+    active?: boolean;
     pages?: Page[];
     imagePreview?: any;
     description?: string;
 }
 
-const initalPage =  new Page(1);
-initalPage.imagePreview = 'assets/pages-preview/a4.png';
+export class AddControl {
+    static readonly type = '[Report] AddControl';
+    constructor(public control: Control) { }
+}
 
-const initalPage1 =  new Page(2);
-initalPage1.imagePreview = 'assets/pages-preview/a4.png';
+export class ChangeActivePage {
+    static readonly type = '[Report] ChangeActivePage';
+    constructor(public pageNumber: number) { }
+}
 
-const initial: ReportStateModel = {
-    id: 'e680256707d4',
-    reportName: 'Report 1',
-    active: true,
-    description: 'The safety of operational requires that all relevant statements are considered and the associated responsibility and accountability for compliance are accepted, either jointly or singly.',
-    imagePreview: 'assets/forms-preview/form1.jpg',
-    pages: [
-        initalPage,
-        initalPage1
-    ]
-};
+export class ChangeReportActive {
+    static readonly type = '[Report] ChangeReportActive';
+    constructor(public reportId: string) { }
+}
 
 @State<ReportStateModel[]>({
     name: 'reports',
-    defaults: [
-        initial
-    ],
+    defaults: reportsData,
 })
 export class ReportsState {
+
+    constructor(private store: Store) { }
+
+    @Selector() static controlOfPageActive(state: ReportStateModel[]) {
+        const reportActive = state.find(r => r.active === true)
+        if (reportActive) {
+            const controls = reportActive.pages.find(p => p.active === true);
+            if (controls && controls.controls) {
+                return controls.controls
+            }
+        }
+        return null;
+    }
+
     @Selector() static pageOfReportSelected(state: ReportStateModel[]) {
         const reportActive = state.find(x => x.active === true);
         if (reportActive) {
@@ -42,5 +55,60 @@ export class ReportsState {
         }
         return null;
     }
-    
+
+    @Selector() static pageActive(state: ReportStateModel[]) {
+        const reportActive = state.find(x => x.active === true);
+        if (reportActive) {
+            const pageActive = reportActive.pages.find(p => p.active === true);
+            return pageActive;
+        }
+        return null;
+    }
+
+    @Action(ChangeReportActive)
+    changeReportActive(ctx: StateContext<ReportStateModel[]>, action: ChangeReportActive) {
+        const state = ctx.getState();
+        ctx.setState(
+            produce(state, draft => {
+                draft.filter(x => x.active === true).forEach(r => r.active = false);
+                const reportSelected = draft.find(x => x.id === action.reportId);
+                reportSelected.active = true;
+            })
+        )
+    }
+
+
+    @Action(ChangeActivePage)
+    changeActivePage(ctx: StateContext<ReportStateModel[]>, action: ChangeActivePage) {
+        const state = ctx.getState();
+        produce(state, draft => {
+            const reportActive = draft.find(r => r.active === true);
+            const pageActive = reportActive.pages.filter(p => p.active === true);
+            if (pageActive.length > 0) {
+                pageActive.forEach(p => p.active = false);
+            }
+            const page = reportActive.pages.find(p => p.pageNumber === action.pageNumber);
+            if (page) {
+                page.active = true;
+            }
+        })
+    }
+
+
+    @Action(AddControl)
+    addControl(ctx: StateContext<ReportStateModel[]>, action: AddControl) {
+        const state = ctx.getState();
+        produce(state, draft => {
+            const reportActive = draft.find(x => x.active === true);
+            if (reportActive) {
+               const pageActive = reportActive.pages.find(p => p.active === true);
+               if (!pageActive.controls) {
+                   pageActive.controls = [];
+               }
+               pageActive.controls.push(action.control);
+            }
+        })
+    }
 }
+
+

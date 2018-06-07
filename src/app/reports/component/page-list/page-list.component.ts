@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ReportsState } from '../../../core/state mangement/states';
+import { ChangeActivePage, ReportsState } from '../../../core/state mangement/states';
 import { Page } from './../../../core/models/page';
 
 @Component({
@@ -12,11 +12,14 @@ import { Page } from './../../../core/models/page';
 export class PageListComponent implements OnInit {
 
   @Select(ReportsState.pageOfReportSelected) pages$:  Observable<Page[]>;
-  constructor() {
+  constructor(private store: Store) {
 
    }
 
   ngOnInit() {
   }
 
+  changePageActive(page: Page) {
+    this.store.dispatch(new ChangeActivePage(page.pageNumber));
+  }
 }

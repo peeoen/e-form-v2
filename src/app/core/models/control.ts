@@ -1,7 +1,7 @@
 export interface Control { 
     x: number;
     y: number;
-    control: any;
+    controlName: string;
     config?: any;
     value?: any;
 }
