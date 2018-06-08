@@ -22,7 +22,10 @@ export class ReportBuilderComponent implements OnInit {
   pdfSrc: string;
   viewContainerRef: ViewContainerRef;
   controls: ControlStateModel[];
-  components: ComponentRef<{}>[] = [];
+  components: {
+    componentRef: ComponentRef<{}>,
+    id: string
+  } [] = [];
 
   @ViewChild(ControlDirective) controlHost: ControlDirective;
 
@@ -36,11 +39,11 @@ export class ReportBuilderComponent implements OnInit {
     this.viewContainerRef = this.controlHost.viewContainerRef;
     this.controls = this.store.selectSnapshot(ControlsState);
     this.renderPdf();
-    
+
     this.action$.pipe(
       ofActionSuccessful(ChangeActivePage)
     ).subscribe(payload => {
-     this.renderPdf();
+      this.renderPdf();
     })
   }
 
@@ -88,6 +91,15 @@ export class ReportBuilderComponent implements OnInit {
   }
 
   onDrop(event: DndDropEvent) {
+    if (event.dropEffect === 'copy') {
+      this.createControl(event);
+    }
+    else if (event.dropEffect === 'move') {
+      this.moveControl(event);
+    }
+  }
+
+  private createControl(event: DndDropEvent) {
     const compSelected = event.data.name;
     const comp = this.controls.find(c => c.name === compSelected);
     if (comp) {
@@ -97,19 +109,30 @@ export class ReportBuilderComponent implements OnInit {
     }
   }
 
+  private moveControl(event: DndDropEvent) {
+    const id: string = event.data;
+    const comp = this.components.find(x => x.id === id);
+    comp.componentRef.location.nativeElement.style.left = event.event.offsetX + 'px';
+    comp.componentRef.location.nativeElement.style.top = event.event.offsetY + 'px';
+  }
+
+  private updateControl(id: string, event: DndDropEvent) {
+    
+  }
 
   createComponent(id: string, component: any, left: number, top: number, textContent?: string) {
     const componentFactoty = this.componentFactoryResolver.resolveComponentFactory(component);
     this.viewContainerRef = this.controlHost.viewContainerRef;
     const componentRef = this.viewContainerRef.createComponent(componentFactoty);
-    componentRef.location.nativeElement.style.textContent = textContent;
     componentRef.location.nativeElement.style.left = left + 'px';
     componentRef.location.nativeElement.style.top = top + 'px';
     componentRef.location.nativeElement.style.fontSize = '16px';
     componentRef.location.nativeElement.style.position = 'absolute';
-
     componentRef.instance['id'] = id;
-    this.components.push(componentRef);
+    this.components.push({
+      componentRef: componentRef,
+      id: id
+    });
   }
 
   addControlPage(id: string, controlName: string, left: number, top: number, textContent?: string) {
