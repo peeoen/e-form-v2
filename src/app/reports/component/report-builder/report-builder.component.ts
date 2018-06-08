@@ -6,6 +6,7 @@ import { Control } from '../../../core/models';
 import { AddControl, ChangeActivePage, ReportStateModel } from '../../../core/state mangement/states';
 import { ControlDirective } from '../../../share/directives/control-host.directive';
 import { ControlStateModel, ControlsState } from './../../../core/state mangement/states/control.state';
+import { MoveControl } from './../../../core/state mangement/states/report.state';
 import { GUID } from './../../../utility/guid';
 
 
@@ -112,12 +113,15 @@ export class ReportBuilderComponent implements OnInit {
   private moveControl(event: DndDropEvent) {
     const id: string = event.data;
     const comp = this.components.find(x => x.id === id);
-    comp.componentRef.location.nativeElement.style.left = event.event.offsetX + 'px';
-    comp.componentRef.location.nativeElement.style.top = event.event.offsetY + 'px';
+    const left = event.event.offsetX;
+    const top = event.event.offsetY;
+    comp.componentRef.location.nativeElement.style.left = left + 'px';
+    comp.componentRef.location.nativeElement.style.top = top + 'px';
+    this.updateControl(id, left, top);
   }
 
-  private updateControl(id: string, event: DndDropEvent) {
-    
+  private updateControl(id: string, x: number, y: number) {
+    this.store.dispatch(new MoveControl(id, x, y));
   }
 
   createComponent(id: string, component: any, left: number, top: number, textContent?: string) {

@@ -34,6 +34,11 @@ export class AddPage {
     constructor() { }
 }
 
+export class MoveControl {
+    static readonly type = '[Report] MoveControl';
+    constructor(public id: string, public x: number, public y: number) { }
+}
+
 @State<ReportStateModel[]>({
     name: 'reports',
     defaults: reportsData,
@@ -41,7 +46,6 @@ export class AddPage {
 export class ReportsState {
 
     constructor(private store: Store) { }
-
 
     @Selector() static controlOfPageActive(state: ReportStateModel[]) {
         const reportActive = state.find(r => r.active === true)
@@ -83,7 +87,6 @@ export class ReportsState {
         )
     }
 
-
     @Action(ChangeActivePage)
     changeActivePage(ctx: StateContext<ReportStateModel[]>, action: ChangeActivePage) {
         const state = ctx.getState();
@@ -100,7 +103,6 @@ export class ReportsState {
         })
     }
 
-
     @Action(AddControl)
     addControl(ctx: StateContext<ReportStateModel[]>, action: AddControl) {
         const state = ctx.getState();
@@ -115,7 +117,6 @@ export class ReportsState {
             }
         })
     }
-
 
     @Action(AddPage)
     addPage(ctx: StateContext<ReportStateModel[]>, action: AddPage) {
@@ -133,6 +134,20 @@ export class ReportsState {
                 }
             })
         );
+    }
+
+    @Action(MoveControl)
+    moveControl(ctx: StateContext<ReportStateModel[]>, action: MoveControl) {
+        const state = ctx.getState();
+        produce(state, draft => {
+            const control = draft.find(r => r.active === true).pages
+                .find(x => x.active === true).controls
+                .find(x => x.id === action.id)
+            if (control) {
+                control.x = action.x;
+                control.y = action.y;
+            }
+        })
     }
 }
 
