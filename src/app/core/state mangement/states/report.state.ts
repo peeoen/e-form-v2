@@ -29,6 +29,11 @@ export class ChangeReportActive {
     constructor(public reportId: string) { }
 }
 
+export class AddPage {
+    static readonly type = '[Report] AddPage';
+    constructor() { }
+}
+
 @State<ReportStateModel[]>({
     name: 'reports',
     defaults: reportsData,
@@ -102,13 +107,32 @@ export class ReportsState {
         produce(state, draft => {
             const reportActive = draft.find(x => x.active === true);
             if (reportActive) {
-               const pageActive = reportActive.pages.find(p => p.active === true);
-               if (!pageActive.controls) {
-                   pageActive.controls = [];
-               }
-               pageActive.controls.push(action.control);
+                const pageActive = reportActive.pages.find(p => p.active === true);
+                if (!pageActive.controls) {
+                    pageActive.controls = [];
+                }
+                pageActive.controls.push(action.control);
             }
         })
+    }
+
+
+    @Action(AddPage)
+    addPage(ctx: StateContext<ReportStateModel[]>, action: AddPage) {
+        const state = ctx.getState();
+        ctx.setState(
+            produce(state, draft => {
+                const reportActive = draft.find(r => r.active === true);
+                if (reportActive) {
+                    let maxPage = Math.max(...reportActive.pages.map(p => p.pageNumber));
+                    const newPage = new Page(++maxPage);
+                    newPage.imagePreview = 'assets/pages-preview/a4.png';
+                    reportActive.pages.push(newPage);
+                    reportActive.pages.filter(r => r.active === true).forEach(r => r.active = false);
+                    newPage.active = true;
+                }
+            })
+        );
     }
 }
 

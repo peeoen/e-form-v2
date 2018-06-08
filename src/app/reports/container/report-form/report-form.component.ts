@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
-import { ChangeActivePage, ChangeReportActive, ReportStateModel } from '../../../core/state mangement/states';
+import { AddPage, ChangeActivePage, ChangeReportActive, ReportStateModel } from '../../../core/state mangement/states';
 
 @Component({
   selector: 'app-report-form',
@@ -45,8 +45,7 @@ export class ReportFormComponent implements OnInit, OnDestroy {
   }
 
   addPage() {
-    console.log('add page');
-    
+        this.store.dispatch(new AddPage());
   }
 
   savePage() {
