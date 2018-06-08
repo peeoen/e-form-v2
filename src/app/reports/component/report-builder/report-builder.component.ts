@@ -1,3 +1,4 @@
+import { GUID } from './../../../utility/guid';
 import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Actions, Store, ofActionSuccessful } from '@ngxs/store';
 import * as jsPDF from 'jspdf';
@@ -90,13 +91,14 @@ export class ReportBuilderComponent implements OnInit {
     const compSelected = event.data.name;
     const comp = this.controls.find(c => c.name === compSelected);
     if (comp) {
-      this.createComponent(comp.component, event.event.offsetX, event.event.offsetY, comp.title);
-      this.addControlPage(comp.name, event.event.offsetX, event.event.offsetY, comp.title);
+      const id = GUID.newGuid();
+      this.createComponent(id, comp.component, event.event.offsetX, event.event.offsetY, comp.title);
+      this.addControlPage(id, comp.name, event.event.offsetX, event.event.offsetY, comp.title);
     }
   }
 
 
-  createComponent(component: any, left: number, top: number, textContent?: string) {
+  createComponent(id: string, component: any, left: number, top: number, textContent?: string) {
     const componentFactoty = this.componentFactoryResolver.resolveComponentFactory(component);
     this.viewContainerRef = this.controlHost.viewContainerRef;
     const componentRef = this.viewContainerRef.createComponent(componentFactoty);
@@ -105,15 +107,18 @@ export class ReportBuilderComponent implements OnInit {
     componentRef.location.nativeElement.style.top = top + 'px';
     componentRef.location.nativeElement.style.fontSize = '16px';
     componentRef.location.nativeElement.style.position = 'absolute';
+
+    componentRef.instance['id'] = id;
     this.components.push(componentRef);
   }
 
-  addControlPage(controlName: string, left: number, top: number, textContent?: string) {
+  addControlPage(id: string, controlName: string, left: number, top: number, textContent?: string) {
     const control: Control = {
       x: left,
       y: top,
       controlName: controlName,
-      value: textContent
+      value: textContent,
+      id: id
     }
     this.store.dispatch(new AddControl(control));
   }

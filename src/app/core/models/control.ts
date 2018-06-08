@@ -4,4 +4,6 @@ export interface Control {
     controlName: string;
     config?: any;
     value?: any;
+    id: string;
+    
 }
