@@ -4,7 +4,7 @@ import { Directive, ElementRef, ViewContainerRef } from '@angular/core';
   // tslint:disable-next-line:directive-selector
   selector: '[control-host]'
 })
-export class ControlDirective {
+export class ControlHostDirective {
   constructor(public viewContainerRef: ViewContainerRef, public el: ElementRef) {
 
     

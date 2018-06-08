@@ -1,9 +1,10 @@
+import { ControlDirective } from './directives/control.directive';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { ControlDirective } from './directives/control-host.directive';
+import { ControlHostDirective } from './directives/control-host.directive';
 import { MaterialModule } from './material/index';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { MaterialModule } from './material/index';
     MaterialModule,
   ],
   declarations: [
+    ControlHostDirective,
     ControlDirective
   ],
   exports: [
@@ -24,7 +26,8 @@ import { MaterialModule } from './material/index';
     ReactiveFormsModule,
     PdfViewerModule,
     MaterialModule,
-    ControlDirective,
+    ControlHostDirective,
+    ControlDirective
   ]
 })
 export class SharedModule { }

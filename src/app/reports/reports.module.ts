@@ -28,6 +28,7 @@ const controlComponents = [
     ImageComponent,
 ]
 
+
 @NgModule({
     imports: [
         CommonModule,

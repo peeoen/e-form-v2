@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { DndDropEvent } from 'ngx-drag-drop';
 import { Observable } from 'rxjs';
 import { ReportsState } from '../../../core/state mangement/states';
 
@@ -19,8 +18,4 @@ export class ReportComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
-
-
 }

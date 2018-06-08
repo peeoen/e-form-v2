@@ -4,9 +4,10 @@ import * as jsPDF from 'jspdf';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Control } from '../../../core/models';
 import { AddControl, ChangeActivePage, ReportStateModel } from '../../../core/state mangement/states';
-import { ControlDirective } from '../../../share/directives/control-host.directive';
+import { ControlHostDirective } from '../../../share/directives/control-host.directive';
 import { ControlStateModel, ControlsState } from './../../../core/state mangement/states/control.state';
 import { MoveControl } from './../../../core/state mangement/states/report.state';
+import { ControlDirective } from './../../../share/directives/control.directive';
 import { GUID } from './../../../utility/guid';
 
 
@@ -28,7 +29,7 @@ export class ReportBuilderComponent implements OnInit {
     id: string
   } [] = [];
 
-  @ViewChild(ControlDirective) controlHost: ControlDirective;
+  @ViewChild(ControlHostDirective) controlHost: ControlHostDirective;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
     private store: Store,
@@ -97,6 +98,7 @@ export class ReportBuilderComponent implements OnInit {
     }
     else if (event.dropEffect === 'move') {
       this.moveControl(event);
+
     }
   }
 
@@ -113,8 +115,9 @@ export class ReportBuilderComponent implements OnInit {
   private moveControl(event: DndDropEvent) {
     const id: string = event.data;
     const comp = this.components.find(x => x.id === id);
-    const left = event.event.offsetX;
-    const top = event.event.offsetY;
+    const control = comp.componentRef.instance['control'] as ControlDirective;
+    const left = event.event.offsetX - control.offset.x;
+    const top = event.event.offsetY - control.offset.y;
     comp.componentRef.location.nativeElement.style.left = left + 'px';
     comp.componentRef.location.nativeElement.style.top = top + 'px';
     this.updateControl(id, left, top);
