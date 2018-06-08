@@ -26,8 +26,6 @@ export class ReportHeaderComponent implements OnInit {
   }
 
   onDrop(event: DndDropEvent) {
-  
-    console.log(event);
-    console.log("dropped", JSON.stringify(event, null, 2));
+ 
   }
 }

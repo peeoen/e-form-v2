@@ -1,4 +1,3 @@
-import { GUID } from './../../../utility/guid';
 import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Actions, Store, ofActionSuccessful } from '@ngxs/store';
 import * as jsPDF from 'jspdf';
@@ -7,6 +6,7 @@ import { Control } from '../../../core/models';
 import { AddControl, ChangeActivePage, ReportStateModel } from '../../../core/state mangement/states';
 import { ControlDirective } from '../../../share/directives/control-host.directive';
 import { ControlStateModel, ControlsState } from './../../../core/state mangement/states/control.state';
+import { GUID } from './../../../utility/guid';
 
 
 @Component({
@@ -82,7 +82,7 @@ export class ReportBuilderComponent implements OnInit {
     controls.forEach(c => {
       const comp = this.controls.find(x => x.name === c.controlName);
       if (comp) {
-        this.createComponent(comp.component, c.x, c.y, c.value);
+        this.createComponent(c.id, comp.component, c.x, c.y, c.value);
       }
     })
   }

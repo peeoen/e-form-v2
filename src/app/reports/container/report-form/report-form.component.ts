@@ -49,7 +49,6 @@ export class ReportFormComponent implements OnInit, OnDestroy {
   }
 
   savePage() {
-    console.log('save page');
-    
+    // save page
   }
 }
