@@ -20,36 +20,30 @@
   </div>
   <div class="control-elements">
     <div class="row no-gutters">
-      <div class="font-control control-group row no-gutters" style="width: 293px;">
+      <div class="font-control control-group row no-gutters" style="width: 475px;">
         <div class="col-12 control">
-          <div>
-            <mat-form-field class="font-family">
-              <mat-select [(value)]="selected">
-                <mat-option>None</mat-option>
-                <mat-option value="option1">Calibri</mat-option>
-                <mat-option value="option2">Tahoma</mat-option>
-                <mat-option value="option3">Thai sarabun</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field class="font-size">
-              <mat-select value="14">
-                <mat-option>None</mat-option>
-                <mat-option value="14">14</mat-option>
-                <mat-option value="16">16</mat-option>
-                <mat-option value="18">18</mat-option>
-              </mat-select>
-            </mat-form-field>
-            <div class="d-inline-block font-up-down">
-              <mat-icon class="border-control">add</mat-icon>
-            </div>
-            <div class="d-inline-block font-up-down">
-              <mat-icon class="border-control">remove</mat-icon>
-            </div>
+          <mat-form-field class="font-family">
+            <mat-select [(value)]="selected">
+              <mat-option>None</mat-option>
+              <mat-option value="option1">Calibri</mat-option>
+              <mat-option value="option2">Tahoma</mat-option>
+              <mat-option value="option3">Thai sarabun</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="font-size">
+            <mat-select value="14">
+              <mat-option>None</mat-option>
+              <mat-option value="14">14</mat-option>
+              <mat-option value="16">16</mat-option>
+              <mat-option value="18">18</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="d-inline-block font-up-down">
+            <mat-icon class="border-control">add</mat-icon>
           </div>
-          <div>
+          <div class="d-inline-block font-up-down">
+            <mat-icon class="border-control">remove</mat-icon>
           </div>
-        </div>
-        <div class="col-12 control">
           <div class="d-inline-block font-style">
             <div class="d-inline-block font-up-down">
               <mat-icon class="border-control">format_bold</mat-icon>
@@ -69,18 +63,19 @@
               <mat-icon class="border-control">format_color_text</mat-icon>
             </div>
           </div>
+          <div>
+          </div>
         </div>
         <div class="col-12 align-self-end">
-            <div class="control-desc">
-                Font
-              </div>
+          <div class="control-desc">
+            Font
+          </div>
         </div>
-    
       </div>
       <div class="font-control control-group row no-gutters" style="width: 162px;">
         <div class="col-12 align-self-end text-center">
           <div class="control">
-            <div class="d-inline-block font-style">
+            <div class="d-inline-block ">
               <div class="d-inline-block font-up-down">
                 <mat-icon class="border-control">format_align_left</mat-icon>
               </div>
@@ -102,16 +97,18 @@
           </div>
         </div>
       </div>
-      <div class="font-control control-group row no-gutters" style="width: 110px;padding-top: 10px;">
+      <div class="font-control control-group row no-gutters" style="width: 205px;">
         <div class="col-12 text-center">
-          <mat-form-field class="control-size">
-            <input matInput type="number" placeholder="Width (px)" value="0">
-          </mat-form-field>
-        </div>
-        <div class="col-12 text-center">
-          <mat-form-field class="control-size">
-            <input matInput type="number" placeholder="Heigt (px)" value="0">
-          </mat-form-field>
+          <div class="d-inline-block font-color">
+            <mat-form-field class="control-size">
+              <input matInput type="number" placeholder="Width (px)" value="0">
+            </mat-form-field>
+          </div>
+          <div class="d-inline-block font-color">
+            <mat-form-field class="control-size">
+              <input matInput type="number" placeholder="Heigt (px)" value="0">
+            </mat-form-field>
+          </div>
         </div>
         <div class="col-12 align-self-end">
           <div class="control-desc">
