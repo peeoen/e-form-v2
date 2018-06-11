@@ -18,8 +18,8 @@ mat-sidenav-content > mat-toolbar {
 }
 
 .content{
-   margin-top: 94px;
-   height: calc(100% - 94px);
+   margin-top: 80px;
+   height: calc(100% - 80px);
    padding-bottom: 10px;
 }
 

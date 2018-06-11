@@ -93,12 +93,13 @@ export class ReportBuilderComponent implements OnInit {
   }
 
   onDrop(event: DndDropEvent) {
+
     if (event.dropEffect === 'copy') {
       this.createControl(event);
     }
     else if (event.dropEffect === 'move') {
       this.moveControl(event);
-
+   
     }
   }
 
@@ -121,6 +122,12 @@ export class ReportBuilderComponent implements OnInit {
     comp.componentRef.location.nativeElement.style.left = left + 'px';
     comp.componentRef.location.nativeElement.style.top = top + 'px';
     this.updateControl(id, left, top);
+  }
+
+
+  private getFormContainerPath(elements: Element[]): any {
+    const formContainer = elements.find(x => x.querySelector('.form-container') !== null)
+    return formContainer;
   }
 
   private updateControl(id: string, x: number, y: number) {
@@ -148,7 +155,8 @@ export class ReportBuilderComponent implements OnInit {
       y: top,
       controlName: controlName,
       value: textContent,
-      id: id
+      id: id,
+      active: true
     }
     this.store.dispatch(new AddControl(control));
   }

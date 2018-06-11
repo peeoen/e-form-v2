@@ -5,5 +5,5 @@ export interface Control {
     config?: any;
     value?: any;
     id: string;
-    
+    active?: boolean;
 }

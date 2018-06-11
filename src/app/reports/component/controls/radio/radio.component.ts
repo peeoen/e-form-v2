@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlDirective } from '../../../../share/directives/control.directive';
 @Component({
-  selector: 'app-radio',
+  selector: '[app-radio]',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss']
 })

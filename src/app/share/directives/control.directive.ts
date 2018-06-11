@@ -16,6 +16,7 @@ export class ControlDirective {
 
     @HostListener('mousedown', ['$event'])
     onMouseDown(event: MouseEvent) {
+
         this.offset = {
             x: event.offsetX,
             y: event.offsetY

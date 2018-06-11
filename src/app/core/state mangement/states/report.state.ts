@@ -1,7 +1,7 @@
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import produce from "immer";
-import { Control } from '../../models';
 import { Page } from '../../models/page';
+import { Control } from './../../models/control';
 import { reportsData } from './../data/report.data';
 import { ReportStateModel } from './report.state';
 
@@ -47,7 +47,7 @@ export class ReportsState {
 
     constructor(private store: Store) { }
 
-    @Selector() static controlOfPageActive(state: ReportStateModel[]) {
+    @Selector() static controlOfPageActive(state: ReportStateModel[]): Control[] {
         const reportActive = state.find(r => r.active === true)
         if (reportActive) {
             const controls = reportActive.pages.find(p => p.active === true);
@@ -73,6 +73,11 @@ export class ReportsState {
             return pageActive;
         }
         return null;
+    }
+
+    @Selector() static reportActive(state: ReportStateModel[]) {
+        const reportActive = state.find(x => x.active === true);
+        return reportActive;
     }
 
     @Action(ChangeReportActive)
@@ -113,6 +118,7 @@ export class ReportsState {
                 if (!pageActive.controls) {
                     pageActive.controls = [];
                 }
+                pageActive.controls.forEach(c => c.active = false);
                 pageActive.controls.push(action.control);
             }
         })
