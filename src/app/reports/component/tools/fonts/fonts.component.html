@@ -1,52 +1,44 @@
-<div class="control-group row no-gutters" style="width: 475px;">
-  <div class="col-12 control">
-    <mat-form-field class="font-family">
-      <mat-select [(value)]="selected">
-        <mat-option>None</mat-option>
-        <mat-option value="option1">Calibri</mat-option>
-        <mat-option value="option2">Tahoma</mat-option>
-        <mat-option value="option3">Thai sarabun</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="font-size">
-      <mat-select value="14">
-        <mat-option>None</mat-option>
-        <mat-option value="14">14</mat-option>
-        <mat-option value="16">16</mat-option>
-        <mat-option value="18">18</mat-option>
-      </mat-select>
-    </mat-form-field>
+<div class="col-12 control">
+  <mat-form-field class="font-family">
+    <mat-select value="option1">
+      <mat-option>None</mat-option>
+      <mat-option value="option1">Calibri</mat-option>
+      <mat-option value="option2">Tahoma</mat-option>
+      <mat-option value="option3">Thai sarabun</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="font-size">
+    <mat-select value="14">
+      <mat-option>None</mat-option>
+      <mat-option value="14">14</mat-option>
+      <mat-option value="16">16</mat-option>
+      <mat-option value="18">18</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="d-inline-block font-up-down">
+    <mat-icon class="border-control">add</mat-icon>
+  </div>
+  <div class="d-inline-block font-up-down">
+    <mat-icon class="border-control">remove</mat-icon>
+  </div>
+  <div class="d-inline-block font-style">
     <div class="d-inline-block font-up-down">
-      <mat-icon class="border-control">add</mat-icon>
+      <mat-icon class="border-control">format_bold</mat-icon>
     </div>
     <div class="d-inline-block font-up-down">
-      <mat-icon class="border-control">remove</mat-icon>
+      <mat-icon class="border-control">format_italic</mat-icon>
     </div>
-    <div class="d-inline-block font-style">
-      <div class="d-inline-block font-up-down">
-        <mat-icon class="border-control">format_bold</mat-icon>
-      </div>
-      <div class="d-inline-block font-up-down">
-        <mat-icon class="border-control">format_italic</mat-icon>
-      </div>
-      <div class="d-inline-block font-up-down">
-        <mat-icon class="border-control">format_underline</mat-icon>
-      </div>
-    </div>
-    <div class="d-inline-block font-color">
-      <div class="d-inline-block font-up-down">
-        <mat-icon class="border-control">format_color_fill</mat-icon>
-      </div>
-      <div class="d-inline-block font-up-down">
-        <mat-icon class="border-control">format_color_text</mat-icon>
-      </div>
-    </div>
-    <div>
+    <div class="d-inline-block font-up-down">
+      <mat-icon class="border-control">format_underline</mat-icon>
     </div>
   </div>
-  <div class="col-12 align-self-end">
-    <div class="control-desc">
-      Font
+  <div class="d-inline-block font-color">
+    <div class="d-inline-block font-up-down">
+      <mat-icon class="border-control">format_color_fill</mat-icon>
+    </div>
+    <div class="d-inline-block font-up-down">
+      <mat-icon class="border-control">format_color_text</mat-icon>
     </div>
   </div>
-</div>
+  <div>
+  </div>
