@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ControlActiveDirective } from '../../../../share/directives/control-active.directive';
 import { ControlDirective } from '../../../../share/directives/control.directive';
 
 @Component({
@@ -12,6 +13,7 @@ export class LabelComponent implements OnInit {
 
   @ViewChild(ControlDirective) control: ControlDirective;
 
+  @ViewChild(ControlActiveDirective) controlActive: ControlActiveDirective;
   constructor() { }
 
   ngOnInit() {

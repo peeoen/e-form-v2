@@ -7,6 +7,7 @@ import { AddControl, ChangeActivePage, ReportStateModel } from '../../../core/st
 import { ControlHostDirective } from '../../../share/directives/control-host.directive';
 import { ControlsState, ControlStateModel } from './../../../core/state mangement/states/control.state';
 import { ChangeControlActive, MoveControl } from './../../../core/state mangement/states/report.state';
+import { ControlActiveDirective } from './../../../share/directives/control-active.directive';
 import { ControlDirective } from './../../../share/directives/control.directive';
 import { GUID } from './../../../utility/guid';
 
@@ -27,7 +28,7 @@ export class ReportBuilderComponent implements OnInit {
   components: {
     componentRef: ComponentRef<{}>,
     id: string
-  } [] = [];
+  }[] = [];
 
   @ViewChild(ControlHostDirective) controlHost: ControlHostDirective;
 
@@ -99,7 +100,7 @@ export class ReportBuilderComponent implements OnInit {
     }
     else if (event.dropEffect === 'move') {
       this.moveControl(event);
-   
+
     }
   }
 
@@ -124,12 +125,6 @@ export class ReportBuilderComponent implements OnInit {
     this.updateControl(id, left, top);
   }
 
-
-  private getFormContainerPath(elements: Element[]): any {
-    const formContainer = elements.find(x => x.querySelector('.form-container') !== null)
-    return formContainer;
-  }
-
   private updateControl(id: string, x: number, y: number) {
     this.store.dispatch(new MoveControl(id, x, y));
   }
@@ -144,7 +139,7 @@ export class ReportBuilderComponent implements OnInit {
     componentRef.location.nativeElement.style.position = 'absolute';
     componentRef.instance['id'] = id;
 
-    componentRef.location.nativeElement.addEventListener('click',() => {
+    componentRef.location.nativeElement.addEventListener('click', () => {
       this.clickComponent(id);
     });
 
@@ -154,9 +149,25 @@ export class ReportBuilderComponent implements OnInit {
     });
   }
 
-  clickComponent(controlId) {
-    console.log(controlId);
+  clickComponent(controlId: string) {
     this.store.dispatch(new ChangeControlActive(controlId));
+    this.setControlInActiveAll();
+    this.setControlActive(controlId);
+  }
+
+  private setControlActive(controlId: string) {
+    const compActive = this.components.find(c => c.id === controlId);
+    if (compActive) {
+      const active = compActive.componentRef.instance['controlActive'] as ControlActiveDirective;
+      active.setActive();
+    }
+  }
+
+  private setControlInActiveAll() {
+    this.components.forEach(c => {
+      const comps = c.componentRef.instance['controlActive'] as ControlActiveDirective;
+      comps.setInActive();
+    });
   }
 
   addControlPage(id: string, controlName: string, left: number, top: number, textContent?: string) {
@@ -169,5 +180,11 @@ export class ReportBuilderComponent implements OnInit {
       active: true
     }
     this.store.dispatch(new AddControl(control));
+  }
+
+  clickOutSide(event) {
+    if (event.target.className === 'form-container') {
+      this.setControlInActiveAll();
+    }
   }
 }

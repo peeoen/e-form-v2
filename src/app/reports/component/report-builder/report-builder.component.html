@@ -1,9 +1,9 @@
 <div class="report-container">
   <div class="form-container"
-  dndDropzone (dndDrop)="onDrop($event)"
-   #formContainer 
+  dndDropzone (dndDrop)="onDrop($event)" (click)="clickOutSide($event)"
+   #formContainer
    [ngStyle]="{'height': screen?.height, 'width': screen?.width}">
    <ng-template control-host></ng-template>
   </div>
-   <pdf-viewer id="viewer" [fit-to-page]="true" [src]="pdfSrc" [render-text]="true" style="display: block;" (page-rendered)="pageRendered($event)"></pdf-viewer> 
+   <pdf-viewer   id="viewer" [fit-to-page]="true" [src]="pdfSrc" [render-text]="true" style="display: block;" (page-rendered)="pageRendered($event)"></pdf-viewer> 
 </div>
