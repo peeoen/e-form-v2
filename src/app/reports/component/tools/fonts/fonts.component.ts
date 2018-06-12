@@ -10,12 +10,12 @@ export class FontsComponent implements OnInit {
 
   fontStyles: FontStyles;
   fontSizes: FontSizes;
-
+  fontColor: string;
+  bgColor: string;
   constructor() { 
     const _font = new Font();
     this.fontStyles = _font.fontStyles;
     this.fontSizes = _font.fontSizes;
-    console.log(this.fontSizes);
     
   }
 

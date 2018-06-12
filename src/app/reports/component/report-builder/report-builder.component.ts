@@ -1,12 +1,12 @@
 import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { Actions, Store, ofActionSuccessful } from '@ngxs/store';
+import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import * as jsPDF from 'jspdf';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Control } from '../../../core/models';
 import { AddControl, ChangeActivePage, ReportStateModel } from '../../../core/state mangement/states';
 import { ControlHostDirective } from '../../../share/directives/control-host.directive';
-import { ControlStateModel, ControlsState } from './../../../core/state mangement/states/control.state';
-import { MoveControl } from './../../../core/state mangement/states/report.state';
+import { ControlsState, ControlStateModel } from './../../../core/state mangement/states/control.state';
+import { ChangeControlActive, MoveControl } from './../../../core/state mangement/states/report.state';
 import { ControlDirective } from './../../../share/directives/control.directive';
 import { GUID } from './../../../utility/guid';
 
@@ -143,10 +143,20 @@ export class ReportBuilderComponent implements OnInit {
     componentRef.location.nativeElement.style.fontSize = '16px';
     componentRef.location.nativeElement.style.position = 'absolute';
     componentRef.instance['id'] = id;
+
+    componentRef.location.nativeElement.addEventListener('click',() => {
+      this.clickComponent(id);
+    });
+
     this.components.push({
       componentRef: componentRef,
       id: id
     });
+  }
+
+  clickComponent(controlId) {
+    console.log(controlId);
+    this.store.dispatch(new ChangeControlActive(controlId));
   }
 
   addControlPage(id: string, controlName: string, left: number, top: number, textContent?: string) {
