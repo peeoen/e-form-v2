@@ -1,18 +1,41 @@
 export class Font {
-    // fonts: {text:string, value:string}[] = []; 
-    fonts: string[] = []; 
-
+    fontStyles: FontStyles = {};
+    fontSizes: FontSizes = {};
 
     constructor() {
-        const _fonts = [
-            'Arial', 
-            'Serif', 
-            'Helvetica', 
-            'Sans-Serif', 
-            'Open Sans', 
+        this.initialFontStyles();
+        this.initialFontSizes();
+    }
+
+    initialFontStyles() {
+        const _fontStyle = [
+            'Arial',
+            'Serif',
+            'Helvetica',
+            'Sans-Serif',
+            'Open Sans',
             'Roboto Slab'
         ]
-
-        this.fonts =  _fonts;
+        this.fontStyles.default = 'Sans-Serif';
+        this.fontStyles.list = _fontStyle;
     }
+
+    initialFontSizes() {
+        const _size: number[] = [
+            8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72
+        ];
+        this.fontSizes.default = 14;
+        this.fontSizes.list = _size;
+    }
+}
+
+
+export interface FontStyles {
+    default?: string;
+    list?: string[];
+}
+
+export interface FontSizes {
+    default?: number;
+    list?: number[];
 }

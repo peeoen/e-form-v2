@@ -1,18 +1,12 @@
 <div class="col-12 control">
   <mat-form-field class="font-family">
-    <mat-select value="option1">
-      <mat-option>None</mat-option>
-      <mat-option value="option1">Calibri</mat-option>
-      <mat-option value="option2">Tahoma</mat-option>
-      <mat-option value="option3">Thai sarabun</mat-option>
+    <mat-select [value]="fontStyles?.default">
+      <mat-option [value]="font" *ngFor="let font of fontStyles?.list">{{font}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="font-size">
-    <mat-select value="14">
-      <mat-option>None</mat-option>
-      <mat-option value="14">14</mat-option>
-      <mat-option value="16">16</mat-option>
-      <mat-option value="18">18</mat-option>
+    <mat-select [value]="fontSizes?.default">
+      <mat-option [value]="size" *ngFor="let size of fontSizes?.list">{{size}}</mat-option>
     </mat-select>
   </mat-form-field>
   <div class="d-inline-block font-up-down">
