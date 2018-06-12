@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import * as jsPDF from 'jspdf';
 import { DndDropEvent } from 'ngx-drag-drop';
@@ -6,9 +6,7 @@ import { Control } from '../../../core/models';
 import { AddControl, ChangeActivePage, ReportStateModel } from '../../../core/state mangement/states';
 import { ControlHostDirective } from '../../../share/directives/control-host.directive';
 import { ControlsState, ControlStateModel } from './../../../core/state mangement/states/control.state';
-import { ChangeControlActive, MoveControl } from './../../../core/state mangement/states/report.state';
-import { ControlActiveDirective } from './../../../share/directives/control-active.directive';
-import { ControlDirective } from './../../../share/directives/control.directive';
+import { ComponentLoaderService } from './../../../share/services/component-loader';
 import { GUID } from './../../../utility/guid';
 
 
@@ -23,24 +21,17 @@ export class ReportBuilderComponent implements OnInit {
     height: null
   };
   pdfSrc: string;
-  viewContainerRef: ViewContainerRef;
   controls: ControlStateModel[];
-  components: {
-    componentRef: ComponentRef<{}>,
-    id: string
-  }[] = [];
 
   @ViewChild(ControlHostDirective) controlHost: ControlHostDirective;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver,
-    private store: Store,
-    private action$: Actions) {
-
-  }
+   constructor(private store: Store,
+    private action$: Actions,
+    private componentLoaderService: ComponentLoaderService) { }
 
   ngOnInit() {
-    this.viewContainerRef = this.controlHost.viewContainerRef;
     this.controls = this.store.selectSnapshot(ControlsState);
+    this.componentLoaderService.setViewContainerRef(this.controlHost.viewContainerRef);
     this.renderPdf();
 
     this.action$.pipe(
@@ -48,32 +39,26 @@ export class ReportBuilderComponent implements OnInit {
     ).subscribe(payload => {
       this.renderPdf();
     })
+    
   }
 
   renderPdf() {
-    this.clearTemplate();
+    this.componentLoaderService.clearTemplate();
     this.iniPDF();
-    this.initControl();
+    this.initPage();
   }
 
   iniPDF() {
     const doc = new jsPDF();
     const uri = doc.output('arraybuffer');
     this.pdfSrc = uri;
-
   }
 
-  initControl() {
+  initPage() {
     const reports: ReportStateModel[] = this.store.selectSnapshot(state => state.reports);
     const pageActive = reports.find(r => r.active === true).pages.find(p => p.active === true);
     if (pageActive && pageActive.controls) {
-      this.createControls(pageActive.controls);
-    }
-  }
-
-  clearTemplate() {
-    if (this.viewContainerRef) {
-      this.viewContainerRef.clear();
+      this.initialControls(pageActive.controls);
     }
   }
 
@@ -84,23 +69,22 @@ export class ReportBuilderComponent implements OnInit {
     this.screen.height = el.clientHeight + 'px';
   }
 
-  createControls(controls: Control[]) {
+  initialControls(controls: Control[]) {
     controls.forEach(c => {
       const comp = this.controls.find(x => x.name === c.controlName);
       if (comp) {
-        this.createComponent(c.id, comp.component, c.x, c.y, c.value);
+        this.componentLoaderService.createComponent(comp.component, c.id, c.x, c.y, comp.title);
       }
     })
   }
 
   onDrop(event: DndDropEvent) {
-
     if (event.dropEffect === 'copy') {
       this.createControl(event);
     }
     else if (event.dropEffect === 'move') {
-      this.moveControl(event);
-
+      const id: string = event.data;
+      this.componentLoaderService.moveControl(id, event.event.offsetX, event.event.offsetY);
     }
   }
 
@@ -109,66 +93,11 @@ export class ReportBuilderComponent implements OnInit {
     const comp = this.controls.find(c => c.name === compSelected);
     if (comp) {
       const id = GUID.newGuid();
-      this.createComponent(id, comp.component, event.event.offsetX, event.event.offsetY, comp.title);
+      this.componentLoaderService.createComponent(comp.component, id, event.event.offsetX, event.event.offsetY, comp.title);
       this.addControlPage(id, comp.name, event.event.offsetX, event.event.offsetY, comp.title);
     }
   }
 
-  private moveControl(event: DndDropEvent) {
-    const id: string = event.data;
-    const comp = this.components.find(x => x.id === id);
-    const control = comp.componentRef.instance['control'] as ControlDirective;
-    const left = event.event.offsetX - control.offset.x;
-    const top = event.event.offsetY - control.offset.y;
-    comp.componentRef.location.nativeElement.style.left = left + 'px';
-    comp.componentRef.location.nativeElement.style.top = top + 'px';
-    this.updateControl(id, left, top);
-  }
-
-  private updateControl(id: string, x: number, y: number) {
-    this.store.dispatch(new MoveControl(id, x, y));
-  }
-
-  createComponent(id: string, component: any, left: number, top: number, textContent?: string) {
-    const componentFactoty = this.componentFactoryResolver.resolveComponentFactory(component);
-    this.viewContainerRef = this.controlHost.viewContainerRef;
-    const componentRef = this.viewContainerRef.createComponent(componentFactoty);
-    componentRef.location.nativeElement.style.left = left + 'px';
-    componentRef.location.nativeElement.style.top = top + 'px';
-    componentRef.location.nativeElement.style.fontSize = '16px';
-    componentRef.location.nativeElement.style.position = 'absolute';
-    componentRef.instance['id'] = id;
-
-    componentRef.location.nativeElement.addEventListener('click', () => {
-      this.clickComponent(id);
-    });
-
-    this.components.push({
-      componentRef: componentRef,
-      id: id
-    });
-  }
-
-  clickComponent(controlId: string) {
-    this.store.dispatch(new ChangeControlActive(controlId));
-    this.setControlInActiveAll();
-    this.setControlActive(controlId);
-  }
-
-  private setControlActive(controlId: string) {
-    const compActive = this.components.find(c => c.id === controlId);
-    if (compActive) {
-      const active = compActive.componentRef.instance['controlActive'] as ControlActiveDirective;
-      active.setActive();
-    }
-  }
-
-  private setControlInActiveAll() {
-    this.components.forEach(c => {
-      const comps = c.componentRef.instance['controlActive'] as ControlActiveDirective;
-      comps.setInActive();
-    });
-  }
 
   addControlPage(id: string, controlName: string, left: number, top: number, textContent?: string) {
     const control: Control = {
@@ -184,7 +113,7 @@ export class ReportBuilderComponent implements OnInit {
 
   clickOutSide(event) {
     if (event.target.className === 'form-container') {
-      this.setControlInActiveAll();
+      this.componentLoaderService.setControlInActiveAll();
     }
   }
 }

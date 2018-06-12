@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Actions, Store, ofActionSuccessful } from '@ngxs/store';
+import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import { DndDropEvent } from 'ngx-drag-drop';
-import { Subscription, merge } from 'rxjs';
+import { merge, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 // import { ChangeReportActive } from './../../../core/state mangement/states/report.state';
 import { AddControl, ChangeActivePage, ChangeReportActive, MoveControl } from './../../../core/state mangement/states/report.state';
@@ -33,7 +33,7 @@ export class ReportHeaderComponent implements OnInit, OnDestroy {
     this.actionSubscription$ = concatActions.pipe(
       debounceTime(10)
     ).subscribe(() => {
-      console.log('action');
+
     })
 
   }
