@@ -1,7 +1,7 @@
 <div *ngIf="!reportNotFound" class="container-fluid">
   <div class="row justify-content-md-center">
     <div class="content content-header">
-      <app-report-header [reportName]="report.reportName" (added)="addPage()" (saved)="savePage()"></app-report-header>
+      <app-report-header [reportName]="report.reportName" (saved)="savePage()"></app-report-header>
     </div>
   </div>
   <div class="row justify-content-md-center">
@@ -14,7 +14,7 @@
           <app-report-builder></app-report-builder>
         </div>
         <div class="page-panel">
-          <app-page-list></app-page-list>
+          <app-page-list  (added)="addPage()"></app-page-list>
         </div>
       </div>
     </div>

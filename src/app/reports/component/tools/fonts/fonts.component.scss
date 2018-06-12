@@ -1,0 +1,46 @@
+.control-group {
+    padding: 0px 20px;
+    border-right: 2px solid gray;
+}
+
+
+.control {
+    padding-bottom: 10px;
+}
+
+mat-form-field.font-family {
+    width: 120px;
+}
+
+mat-form-field {
+    margin-right: 10px;
+    font-size: 13px;
+}
+
+mat-form-field.font-size {
+    width: 50px;
+}
+
+.font-up-down {
+    vertical-align: middle;
+    cursor: pointer;
+    color: black;
+    margin: 0px 2px;
+}
+
+.border-control {
+    border: 1px solid #000;
+    padding: 2px;
+    height: 100%;
+    width: 100%;
+    font-size: 20px;
+}
+
+.font-color, .font-style {
+    margin-left: 15px;
+}
+
+.control-desc {
+    font-size: 11px;
+    text-align: center;
+}

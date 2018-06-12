@@ -4,6 +4,7 @@ import { DndModule } from 'ngx-drag-drop';
 import { SharedModule } from '../share/share.module';
 import { CheckboxComponent, DropdownComponent, ImageComponent, LabelComponent, RadioComponent, TextComponent } from './component/controls/index';
 import { ControlComponent, ControlListComponent, PageComponent, PageListComponent, ReportBuilderComponent, ReportHeaderComponent } from './component/index';
+import { FontsComponent } from './component/tools/index';
 import { ReportFormComponent } from './container/report-form/report-form.component';
 import { ReportComponent } from './container/report/report.component';
 import { ReportRoutingModule } from './report-routing.module';
@@ -26,6 +27,7 @@ const controlComponents = [
     RadioComponent,
     DropdownComponent,
     ImageComponent,
+    FontsComponent,
 ]
 
 
@@ -39,6 +41,7 @@ const controlComponents = [
     declarations: [
         ...mainComponents,
         ...controlComponents,
+
     ],
     exports: [
         ...mainComponents,

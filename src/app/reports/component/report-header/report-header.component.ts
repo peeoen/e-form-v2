@@ -44,10 +44,6 @@ export class ReportHeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  addPage() {
-    this.added.emit();
-  }
-
   savePage() {
     this.saved.emit();
   }
