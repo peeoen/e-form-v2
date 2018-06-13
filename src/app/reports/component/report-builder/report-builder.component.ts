@@ -94,6 +94,7 @@ export class ReportBuilderComponent implements OnInit {
     if (comp) {
       const id = GUID.newGuid();
       this.componentLoaderService.createComponent(comp.component, id, event.event.offsetX, event.event.offsetY, comp.title);
+      this.componentLoaderService.controlActive(id);
       this.addControlPage(id, comp.name, event.event.offsetX, event.event.offsetY, comp.title);
     }
   }

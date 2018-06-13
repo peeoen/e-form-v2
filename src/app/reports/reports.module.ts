@@ -9,6 +9,7 @@ import { AlignmentComponent, FontsComponent, SizeComponent } from './component/t
 import { ReportFormComponent } from './container/report-form/report-form.component';
 import { ReportComponent } from './container/report/report.component';
 import { ReportRoutingModule } from './report-routing.module';
+import { StylesComponent } from './component/tools/styles/styles.component';
 
 const mainComponents = [
     ReportComponent,
@@ -49,7 +50,8 @@ const toolsComponent = [
     declarations: [
         ...mainComponents,
         ...controlComponents,
-        ...toolsComponent
+        ...toolsComponent,
+        StylesComponent
     ],
     exports: [
         ...mainComponents,

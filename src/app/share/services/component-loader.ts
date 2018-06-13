@@ -37,7 +37,7 @@ export class ComponentLoaderService {
         componentRef.location.nativeElement.style.position = 'absolute';
         componentRef.instance['id'] = id;
         componentRef.location.nativeElement.addEventListener('click', () => {
-            this.clickComponent(id);
+            this.controlActive(id);
         });
         this.components.push({
             componentRef: componentRef,
@@ -70,18 +70,20 @@ export class ComponentLoaderService {
         this.store.dispatch(new MoveControl(id, left, top));
     }
 
+    controlActive(controlId: string) {
+        this.store.dispatch(new ChangeControlActive(controlId));
+        this.setControlInActiveAll();
+        this.setControlActive(controlId);
+    }
+
+
     private getComponent(controlId: string) {
         const compActive = this.components.find(c => c.id === controlId);
         return compActive;
     }
 
 
-    private clickComponent(controlId: string) {
-        this.store.dispatch(new ChangeControlActive(controlId));
-        this.setControlInActiveAll();
-        this.setControlActive(controlId);
-    }
-
+ 
     private setControlActive(controlId: string) {
         const compActive = this.getComponent(controlId);
         if (compActive) {
