@@ -52,12 +52,24 @@ export class ReportsState {
 
     constructor(private store: Store) { }
 
-    @Selector() static controlOfPageActive(state: ReportStateModel[]): Control[] {
+    @Selector() static controlsOfPageActive(state: ReportStateModel[]): Control[] {
         const reportActive = state.find(r => r.active === true)
         if (reportActive) {
             const controls = reportActive.pages.find(p => p.active === true);
             if (controls && controls.controls) {
                 return controls.controls
+            }
+        }
+        return null;
+    }
+
+    @Selector() static controlActive(state: ReportStateModel[]): Control {
+        console.log(state);
+        const reportActive = state.find(r => r.active === true)
+        if (reportActive) {
+            const controls = reportActive.pages.find(p => p.active === true);
+            if (controls && controls.controls) {
+                return controls.controls.find(c => c.active === true);
             }
         }
         return null;

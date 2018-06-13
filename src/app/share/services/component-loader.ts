@@ -4,6 +4,7 @@ import { ChangeControlActive, MoveControl } from "../../core/state mangement/sta
 import { ControlActiveDirective } from "../directives/control-active.directive";
 import { ControlDirective } from "../directives/control.directive";
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -36,7 +37,7 @@ export class ComponentLoaderService {
         componentRef.location.nativeElement.style.fontSize = '16px';
         componentRef.location.nativeElement.style.position = 'absolute';
         componentRef.instance['id'] = id;
-        componentRef.instance['styles']  = styles;
+        componentRef.instance['styles'] = styles;
         componentRef.location.nativeElement.addEventListener('click', () => {
             this.controlActive(id);
         });
@@ -84,12 +85,32 @@ export class ComponentLoaderService {
     }
 
 
- 
+
     private setControlActive(controlId: string) {
         const compActive = this.getComponent(controlId);
         if (compActive) {
             const active = compActive.componentRef.instance['controlActive'] as ControlActiveDirective;
             active.setActive();
         }
+    }
+
+    keyboardUpdateComponent(offsetLeft: number, offsetTop: number) {
+        const componentActive = this.store.selectSnapshot((state) => {
+        //    return state;
+        console.log(state)
+            return state.reports.find(x => x.active === true).pages
+                .find(x => x.active === true).controls
+                .find(x => x.active === true)
+        });
+        console.log(componentActive);
+        const comp = this.getComponent(componentActive.id);
+        const control = comp.componentRef.instance['control'] as ControlDirective;
+        const style = comp.componentRef.location.nativeElement.style;
+        const left = parseFloat(style.left) + offsetLeft;
+        const top = parseFloat(style.top) + offsetTop;
+        style.left = left + 'px';
+        style.top = top + 'px';
+        this.store.dispatch(new MoveControl(componentActive.id, left, top));
+
     }
 }

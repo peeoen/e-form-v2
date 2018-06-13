@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import * as jsPDF from 'jspdf';
 import { DndDropEvent } from 'ngx-drag-drop';
@@ -28,7 +28,31 @@ export class ReportBuilderComponent implements OnInit {
 
   @ViewChild(ControlHostDirective) controlHost: ControlHostDirective;
 
-   constructor(private store: Store,
+  @HostListener('window:keydown', ['$event'])
+  keyboardInput(event: KeyboardEvent) {
+    // left
+    if (event.keyCode === 37) {
+      window.event.preventDefault();
+      this.componentLoaderService.keyboardUpdateComponent(-1, 0);
+    }
+    // top
+    if (event.keyCode === 38) {
+      window.event.preventDefault();
+      this.componentLoaderService.keyboardUpdateComponent(0, -1);
+    }
+    // right
+    if (event.keyCode === 39) {
+      window.event.preventDefault();
+      this.componentLoaderService.keyboardUpdateComponent(1, 0);
+    }
+    // down
+    if (event.keyCode === 40) {
+      window.event.preventDefault();
+      this.componentLoaderService.keyboardUpdateComponent(0, 1);
+    }
+  }
+
+  constructor(private store: Store,
     private action$: Actions,
     private componentLoaderService: ComponentLoaderService,
     private controlService: ControlService,
@@ -47,7 +71,7 @@ export class ReportBuilderComponent implements OnInit {
     ).subscribe(payload => {
       this.renderPdf();
     })
-    
+
   }
 
   renderPdf() {
@@ -101,7 +125,7 @@ export class ReportBuilderComponent implements OnInit {
     const comp = this.controls.find(c => c.name === compSelected);
     if (comp) {
       const id = GUID.newGuid();
-      const control: ControlBase<any> = this.controlService.getControl(comp.name); 
+      const control: ControlBase<any> = this.controlService.getControl(comp.name);
       this.componentLoaderService.createComponent(comp.component, id, event.event.offsetX, event.event.offsetY, comp.title, control.styles);
       this.componentLoaderService.controlActive(id);
       this.addControlPage(id, control, event.event.offsetX, event.event.offsetY, comp.title);
