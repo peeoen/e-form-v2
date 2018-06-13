@@ -17,10 +17,10 @@ export class StylesComponent implements OnInit, AfterViewInit {
   ]
 
   options = {
-
-    items: 3, 
     dots: false, 
-    navigation: true
+    margin:10,
+    loop:true,
+    items:4
   }
 
   constructor() { }

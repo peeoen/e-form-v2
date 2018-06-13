@@ -1,18 +1,15 @@
 export class ControlBase<T> {
     value: T;
-    key: string;
-    label: string;
-    controlType: string;
-
+    controlName: string;
+    id: string;
+    styles: any;
     constructor(options: {
+        id: string,
+        controlName?: string
         value?: T,
-        key?: string,
-        label?: string,
-        controlType?: string
-      } = {}) {
-      this.value = options.value;
-      this.key = options.key || '';
-      this.label = options.label || '';
-      this.controlType = options.controlType || '';
+    }) {
+        this.id = options.id;
+        this.value = options.value;
+        this.controlName = options.controlName || '';
     }
 }

@@ -16,7 +16,7 @@ const initial: ControlStateModel[] = [
     component: LabelComponent
   },
   {
-    name: 'title',
+    name: 'textbox',
     title: 'Text',
     icon: 'title',
     component: TextComponent

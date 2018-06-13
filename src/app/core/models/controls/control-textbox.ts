@@ -1,9 +1,9 @@
 import { ControlBase } from "./control-base";
 
-export class ControlLabel extends ControlBase<string> {
-    controlName = 'label';
+export class ControlTextbox extends ControlBase<string> {
+    controlName = 'textbox';
     options: any[] = [];
-    styles: ControlLabelStyle = new ControlLabelStyle();
+    styles: ControlTextboxStyle = new ControlTextboxStyle();
 
     constructor(options: {id:string}) {
         super(options);
@@ -12,7 +12,7 @@ export class ControlLabel extends ControlBase<string> {
 }
 
 
-export class ControlLabelStyle {
+export class ControlTextboxStyle {
     fontFamily: string;
     fontSize: string;
     bold: boolean;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ReportsState } from '../../../core/state mangement/states';
+import { ControlService } from '../../services/control.service';
 
 
 @Component({
@@ -14,7 +15,9 @@ export class ReportComponent implements OnInit {
   @Select(ReportsState) reports$: Observable<any>;
 
 
-  constructor() { }
+  constructor(private controlService: ControlService) { 
+    console.log(this.controlService.controls);
+  }
 
   ngOnInit() {
   }

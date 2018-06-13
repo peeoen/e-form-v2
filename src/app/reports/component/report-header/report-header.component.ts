@@ -3,8 +3,10 @@ import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { merge, Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-// import { ChangeReportActive } from './../../../core/state mangement/states/report.state';
+import { Style } from './../../../core/models/style';
 import { AddControl, ChangeActivePage, ChangeReportActive, MoveControl } from './../../../core/state mangement/states/report.state';
+import { ReportHeaderService } from './../../services/report-header.service';
+
 @Component({
   selector: 'app-report-header',
   templateUrl: './report-header.component.html',
@@ -17,7 +19,9 @@ export class ReportHeaderComponent implements OnInit, OnDestroy {
   @Output() saved = new EventEmitter();
 
   actionSubscription$: Subscription;
-  constructor(private store: Store, private action$: Actions) { 
+  constructor(private store: Store, 
+    private action$: Actions,
+    private reportHeaderService: ReportHeaderService) { 
 
   }
 
@@ -50,5 +54,9 @@ export class ReportHeaderComponent implements OnInit, OnDestroy {
 
   onDrop(event: DndDropEvent) {
 
+  }
+
+  setStyle(style: Style) {
+    this.reportHeaderService.setStyle(style);
   }
 }

@@ -1,12 +1,11 @@
-<div class="row no-gutters">
-    <div class="col-12 text-center">
-        <div class="d-inline-block carosel">
-      
-          <owl-carousel      [options]="options"  [items]="images" [carouselClasses]="['owl-theme', 'sliding']">
-            <div class="item" *ngFor="let image of images;let i = index">
-              <img [src]="image" alt="">
-            </div>
-          </owl-carousel>
+<div class="row no-gutters ">
+  <div class="col-12 text-center">
+    <div class="d-inline-block carosel">
+      <owl-carousel [options]="options" [carouselClasses]="['owl-theme', 'sliding']">
+        <div class="item" *ngFor="let image of images;let i = index">
+          <img [src]="image" alt="">
         </div>
-      </div>
+      </owl-carousel>
+    </div>
+  </div>
 </div>

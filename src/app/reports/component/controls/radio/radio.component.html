@@ -1,5 +1,11 @@
-<mat-radio-group controlPosition control-active [dndDraggable]="id" [dndEffectAllowed]="'move'">
-  <mat-radio-button>
+<mat-radio-group 
+controlPosition 
+control-active 
+[dndDraggable]="id" 
+[dndEffectAllowed]="'move'" 
+class="control-radio"
+[ngStyle]="getStyle()">
+  <mat-radio-button [style.fontFamily]="styles.fontFamily">
 Radio
   </mat-radio-button>
 </mat-radio-group>

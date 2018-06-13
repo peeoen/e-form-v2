@@ -23,19 +23,20 @@ export class ComponentLoaderService {
         this.viewContainerRef = view;
     }
 
-    createComponent(component: any, id: string, left: number, top: number, textContent?: string): ComponentRef<{}> {
+    createComponent(component: any, id: string, left: number, top: number, textContent?: string, styles?: any): ComponentRef<{}> {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
         const componentRef = this.viewContainerRef.createComponent(componentFactory);
-        this.setStyle(componentRef, id, left, top, textContent);
+        this.setStyle(componentRef, id, left, top, textContent, styles);
         return componentRef;
     }
 
-    setStyle(componentRef: ComponentRef<{}>, id: string, left: number, top: number, textContent?: string) {
+    setStyle(componentRef: ComponentRef<{}>, id: string, left: number, top: number, textContent?: string, styles?: any) {
         componentRef.location.nativeElement.style.left = left + 'px';
         componentRef.location.nativeElement.style.top = top + 'px';
         componentRef.location.nativeElement.style.fontSize = '16px';
         componentRef.location.nativeElement.style.position = 'absolute';
         componentRef.instance['id'] = id;
+        componentRef.instance['styles']  = styles;
         componentRef.location.nativeElement.addEventListener('click', () => {
             this.controlActive(id);
         });

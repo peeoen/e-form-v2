@@ -167,13 +167,15 @@ export class ReportsState {
         const state = ctx.getState();
         produce(state, draft => {
             const controls = draft.find(r => r.active === true).pages
-            .find(x => x.active === true).controls;
-
-            controls.forEach(x => x.active = false);
-            const active = controls.find(c => c.id === action.id);
-            if (active) {
-                active.active = true;
+                .find(x => x.active === true).controls;
+            if (controls) {
+                controls.forEach(x => x.active = false);
+                const active = controls.find(c => c.id === action.id);
+                if (active) {
+                    active.active = true;
+                }
             }
+
         });
     }
 }

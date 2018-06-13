@@ -2,6 +2,7 @@
 controlPosition
 control-active
 [dndDraggable]="id" 
-[dndEffectAllowed]="'move'">
-  <p>{{id}}</p>
+[dndEffectAllowed]="'move'"
+[ngStyle]="getStyle()">
+  <p class="d-inline">{{id}}</p>
 </div>

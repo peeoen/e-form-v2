@@ -39,13 +39,12 @@
     }
     .control-group {
         display: inline-block;
-        padding: 0px 20px;
+        padding: 5px 0px;
         color: #007CCB;
-        border-right: 2px solid darkgray;
         position: relative;
     }
-    .controls {
-        padding: 5px 0px;
-        border-right: 2px solid grey;
+    .control-group:not(:last-child) {
+        border-right: 2px solid darkgray;
     }
+
 }

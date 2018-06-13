@@ -1,8 +1,9 @@
-export interface Control { 
+import { ControlBase } from './controls/control-base';
+
+export class Control { 
     x: number;
     y: number;
-    controlName: string;
-    config?: any;
+    control: ControlBase<any>;
     value?: any;
     id: string;
     active?: boolean;

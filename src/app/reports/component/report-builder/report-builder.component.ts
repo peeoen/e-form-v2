@@ -5,6 +5,9 @@ import { DndDropEvent } from 'ngx-drag-drop';
 import { Control } from '../../../core/models';
 import { AddControl, ChangeActivePage, ReportStateModel } from '../../../core/state mangement/states';
 import { ControlHostDirective } from '../../../share/directives/control-host.directive';
+import { ControlService } from '../../services/control.service';
+import { ReportHeaderService } from '../../services/report-header.service';
+import { ControlBase } from './../../../core/models/controls/control-base';
 import { ControlsState, ControlStateModel } from './../../../core/state mangement/states/control.state';
 import { ComponentLoaderService } from './../../../share/services/component-loader';
 import { GUID } from './../../../utility/guid';
@@ -27,9 +30,14 @@ export class ReportBuilderComponent implements OnInit {
 
    constructor(private store: Store,
     private action$: Actions,
-    private componentLoaderService: ComponentLoaderService) { }
+    private componentLoaderService: ComponentLoaderService,
+    private controlService: ControlService,
+    private reportHeaderService: ReportHeaderService) { }
 
   ngOnInit() {
+    this.reportHeaderService.selectStyle.subscribe(s => {
+      console.log(s);
+    });
     this.controls = this.store.selectSnapshot(ControlsState);
     this.componentLoaderService.setViewContainerRef(this.controlHost.viewContainerRef);
     this.renderPdf();
@@ -71,7 +79,7 @@ export class ReportBuilderComponent implements OnInit {
 
   initialControls(controls: Control[]) {
     controls.forEach(c => {
-      const comp = this.controls.find(x => x.name === c.controlName);
+      const comp = this.controls.find(x => x.name === c.control.controlName);
       if (comp) {
         this.componentLoaderService.createComponent(comp.component, c.id, c.x, c.y, comp.title);
       }
@@ -93,18 +101,19 @@ export class ReportBuilderComponent implements OnInit {
     const comp = this.controls.find(c => c.name === compSelected);
     if (comp) {
       const id = GUID.newGuid();
-      this.componentLoaderService.createComponent(comp.component, id, event.event.offsetX, event.event.offsetY, comp.title);
+      const control: ControlBase<any> = this.controlService.getControl(comp.name); 
+      this.componentLoaderService.createComponent(comp.component, id, event.event.offsetX, event.event.offsetY, comp.title, control.styles);
       this.componentLoaderService.controlActive(id);
-      this.addControlPage(id, comp.name, event.event.offsetX, event.event.offsetY, comp.title);
+      this.addControlPage(id, control, event.event.offsetX, event.event.offsetY, comp.title);
     }
   }
 
 
-  addControlPage(id: string, controlName: string, left: number, top: number, textContent?: string) {
+  addControlPage(id: string, controlBase: ControlBase<any>, left: number, top: number, textContent?: string) {
     const control: Control = {
       x: left,
       y: top,
-      controlName: controlName,
+      control: controlBase,
       value: textContent,
       id: id,
       active: true

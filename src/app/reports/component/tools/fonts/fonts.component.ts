@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Style } from '../../../../core/models/style';
 import { Font, FontSizes, FontStyles } from './../../../../core/models/font';
 
 @Component({
@@ -7,6 +8,7 @@ import { Font, FontSizes, FontStyles } from './../../../../core/models/font';
   styleUrls: ['./fonts.component.scss']
 })
 export class FontsComponent implements OnInit {
+  @Output() setStyle = new EventEmitter();
 
   fontStyles: FontStyles;
   fontSizes: FontSizes;
@@ -20,6 +22,10 @@ export class FontsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  selectStyle(style: Style) {
+    this.setStyle.emit(style);
   }
 
 }
