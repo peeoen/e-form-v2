@@ -20,6 +20,7 @@ export class LabelComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
   getStyle() {
@@ -36,5 +37,5 @@ export class LabelComponent implements OnInit {
       return styles;
     }
 
-  }
+  } 
 }
