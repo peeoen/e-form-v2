@@ -38,7 +38,7 @@ export class ComponentLoaderService {
         componentRef.location.nativeElement.style.position = 'absolute';
         componentRef.instance['id'] = id;
         componentRef.instance['styles'] = styles;
-        componentRef.location.nativeElement.addEventListener('click', () => {
+        componentRef.location.nativeElement.addEventListener('dblclick', () => {
             this.controlActive(id);
         });
         this.components.push({
