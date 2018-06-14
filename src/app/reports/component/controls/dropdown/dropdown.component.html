@@ -2,12 +2,17 @@
 controlPosition 
 control-active 
 mat-button 
-[matMenuTriggerFor]="menu"  
+[matMenuTriggerFor]="menu"
 [dndDraggable]="id" 
 [dndDisableIf]="!allowedDrag"
 [dndEffectAllowed]="'move'"
+(dblclick)="dbclick()"
+(click)="clickMenu()"
 [ngStyle]="getStyle()">Dropdown</button>
+
 <mat-menu #menu="matMenu">
   <button mat-menu-item>Item 1</button>
   <button mat-menu-item>Item 2</button>
 </mat-menu>
+
+<!-- [matMenuTriggerFor]="menu"   -->

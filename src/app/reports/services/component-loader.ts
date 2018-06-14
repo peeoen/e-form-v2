@@ -2,8 +2,9 @@ import { ComponentFactoryResolver, ComponentRef, Injectable, ViewContainerRef } 
 import { Store } from "@ngxs/store";
 import { ChangeControlActive, MoveControl, SetInactiveAllControl } from "../../core/state mangement/states/report.state";
 import { ReportStateService } from "../../reports/services/report-state.service";
-import { ControlActiveDirective } from "../directives/control-active.directive";
-import { ControlDirective } from "../directives/control.directive";
+import { ControlActiveDirective } from "../../share/directives/control-active.directive";
+import { ControlDirective } from "../../share/directives/control.directive";
+
 
 
 @Injectable({
@@ -40,9 +41,11 @@ export class ComponentLoaderService {
         componentRef.location.nativeElement.style.position = 'absolute';
         componentRef.instance['id'] = id;
         componentRef.instance['styles'] = styles;
+
         componentRef.location.nativeElement.addEventListener('dblclick', () => {
             this.controlActive(id);
         });
+
         this.components.push({
             componentRef: componentRef,
             id: id
@@ -100,11 +103,6 @@ export class ComponentLoaderService {
     }
 
     keyboardUpdateComponent(offsetLeft: number, offsetTop: number) {
-        // const componentActive = this.store.selectSnapshot((state) => {
-        //     return state.reports.find(x => x.active === true).pages
-        //         .find(x => x.active === true).controls
-        //         .find(x => x.active === true)
-        // });
         const componentActive = this.reportStateService.getControlActive();
         if (componentActive) {
             const comp = this.getComponent(componentActive.id);

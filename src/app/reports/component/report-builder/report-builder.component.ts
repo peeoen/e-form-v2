@@ -5,12 +5,12 @@ import { DndDropEvent } from 'ngx-drag-drop';
 import { Control } from '../../../core/models/control';
 import { AddControl, ReportStateModel } from '../../../core/state mangement/states/report.state';
 import { ControlHostDirective } from '../../../share/directives/control-host.directive';
+import { ComponentLoaderService } from '../../services/component-loader';
 import { ControlService } from '../../services/control.service';
 import { ReportHeaderService } from '../../services/report-header.service';
 import { ReportStateService } from '../../services/report-state.service';
 import { ControlBase } from './../../../core/models/controls/control-base';
 import { ControlsState, ControlStateModel } from './../../../core/state mangement/states/control.state';
-import { ComponentLoaderService } from './../../../share/services/component-loader';
 import { GUID } from './../../../utility/guid';
 
 
