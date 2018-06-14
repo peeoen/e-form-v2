@@ -4,6 +4,7 @@ control-active
 mat-button 
 [matMenuTriggerFor]="menu"  
 [dndDraggable]="id" 
+[dndDisableIf]="!allowedDrag"
 [dndEffectAllowed]="'move'"
 [ngStyle]="getStyle()">Dropdown</button>
 <mat-menu #menu="matMenu">

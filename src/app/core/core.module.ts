@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../share/share.module';
-import { NGXSModule } from './state mangement/index';
-import { RouterModule, Routes } from '@angular/router';
+import { NGXSModule } from './state mangement/ngxs.module';
+
 
 @NgModule({
     imports: [

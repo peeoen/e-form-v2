@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { ChangeActivePage, ReportsState } from '../../../core/state mangement/states';
+import { ChangeActivePage, ReportsState } from '../../../core/state mangement/states/report.state';
 import { Page } from './../../../core/models/page';
 
 @Component({

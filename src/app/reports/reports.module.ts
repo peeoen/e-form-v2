@@ -4,9 +4,21 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { DndModule } from 'ngx-drag-drop';
 import { OwlModule } from 'ngx-owl-carousel';
 import { SharedModule } from '../share/share.module';
-import { CheckboxComponent, DropdownComponent, ImageComponent, LabelComponent, RadioComponent, TextComponent } from './component/controls/index';
-import { ControlComponent, ControlListComponent, PageComponent, PageListComponent, ReportBuilderComponent, ReportHeaderComponent } from './component/index';
-import { AlignmentComponent, FontsComponent, SizeComponent } from './component/tools/index';
+import { ControlListComponent } from './component/control-list/control-list.component';
+import { ControlComponent } from './component/control/control.component';
+import { CheckboxComponent } from './component/controls/checkbox/checkbox.component';
+import { DropdownComponent } from './component/controls/dropdown/dropdown.component';
+import { ImageComponent } from './component/controls/image/image.component';
+import { LabelComponent } from './component/controls/label/label.component';
+import { RadioComponent } from './component/controls/radio/radio.component';
+import { TextComponent } from './component/controls/text/text.component';
+import { PageListComponent } from './component/page-list/page-list.component';
+import { PageComponent } from './component/page/page.component';
+import { ReportBuilderComponent } from './component/report-builder/report-builder.component';
+import { ReportHeaderComponent } from './component/report-header/report-header.component';
+import { AlignmentComponent } from './component/tools/alignment/alignment.component';
+import { FontsComponent } from './component/tools/fonts/fonts.component';
+import { SizeComponent } from './component/tools/size/size.component';
 import { StylesComponent } from './component/tools/styles/styles.component';
 import { ReportFormComponent } from './container/report-form/report-form.component';
 import { ReportComponent } from './container/report/report.component';
@@ -62,6 +74,7 @@ const toolsComponent = [
     entryComponents: [
         ...controlComponents,
     ],
-    providers: [],
+    providers: [
+    ],
 })
 export class ReportsModule { }

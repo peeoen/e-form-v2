@@ -44,6 +44,11 @@ export class ChangeControlActive {
     constructor(public id: string) { }
 }
 
+export class SetInactiveAllControl {
+    static readonly type = '[Report] SetInactiveAllControl';
+    constructor() { }
+}
+
 @State<ReportStateModel[]>({
     name: 'reports',
     defaults: reportsData,
@@ -64,15 +69,9 @@ export class ReportsState {
     }
 
     @Selector() static controlActive(state: ReportStateModel[]): Control {
-        console.log(state);
-        const reportActive = state.find(r => r.active === true)
-        if (reportActive) {
-            const controls = reportActive.pages.find(p => p.active === true);
-            if (controls && controls.controls) {
-                return controls.controls.find(c => c.active === true);
-            }
-        }
-        return null;
+        return state.find(r => r.active === true)
+            .pages.find(p => p.active === true)
+            .controls.find(c => c.active === true);
     }
 
     @Selector() static pageOfReportSelected(state: ReportStateModel[]) {
@@ -163,19 +162,23 @@ export class ReportsState {
     moveControl(ctx: StateContext<ReportStateModel[]>, action: MoveControl) {
         const state = ctx.getState();
         produce(state, draft => {
-            const control = draft.find(r => r.active === true).pages
-                .find(x => x.active === true).controls
-                .find(x => x.id === action.id)
-            if (control) {
-                control.x = action.x;
-                control.y = action.y;
+            const reportActive = draft.find(r => r.active === true)
+            if (reportActive) {
+                const page = reportActive.pages
+                    .find(x => x.active === true)
+                if (page.controls) {
+                    const control = page.controls.find(x => x.id === action.id)
+                    if (control) {
+                        control.x = action.x;
+                        control.y = action.y;
+                    }
+                }
             }
         })
     }
 
     @Action(ChangeControlActive)
     ChangeControlActive(ctx: StateContext<ReportStateModel[]>, action: ChangeControlActive) {
-        const pageActice = this.store.selectSnapshot(ReportsState.pageActive);
         const state = ctx.getState();
         produce(state, draft => {
             const controls = draft.find(r => r.active === true).pages
@@ -188,6 +191,17 @@ export class ReportsState {
                 }
             }
 
+        });
+    }
+
+    @Action(SetInactiveAllControl)
+    setInactiveAllControl(ctx: StateContext<ReportStateModel[]>, action: SetInactiveAllControl) {
+        const state = ctx.getState();
+        produce(state, draft => {
+            const pageActive = draft.find(x => x.active === true).pages.find(p => p.active === true);
+            if (pageActive && pageActive.hasOwnProperty('controls')) {
+                pageActive.controls.filter(c => c.active === true).forEach(c => c.active = false);
+            }
         });
     }
 }

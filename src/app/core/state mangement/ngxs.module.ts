@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { ControlsState, ReportsState } from './states/index';
+import { ControlsState } from './states/control.state';
+import { ReportsState } from './states/report.state';
 
 @NgModule({
     imports: [
@@ -11,9 +12,12 @@ import { ControlsState, ReportsState } from './states/index';
         ]),
         NgxsReduxDevtoolsPluginModule.forRoot()
     ],
+    providers: [
+
+    ],
     exports: [
         NgxsModule,
-        NgxsReduxDevtoolsPluginModule
+        NgxsReduxDevtoolsPluginModule,
     ]
 })
 export class NGXSModule { }

@@ -1,6 +1,7 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, ViewContainerRef } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { ChangeControlActive, MoveControl } from "../../core/state mangement/states";
+import { ChangeControlActive, MoveControl, SetInactiveAllControl } from "../../core/state mangement/states/report.state";
+import { ReportStateService } from "../../reports/services/report-state.service";
 import { ControlActiveDirective } from "../directives/control-active.directive";
 import { ControlDirective } from "../directives/control.directive";
 
@@ -17,6 +18,7 @@ export class ComponentLoaderService {
     }[] = [];
 
     constructor(private componentFactoryResolver: ComponentFactoryResolver,
+        private reportStateService: ReportStateService,
         private store: Store) { }
 
 
@@ -24,14 +26,14 @@ export class ComponentLoaderService {
         this.viewContainerRef = view;
     }
 
-    createComponent(component: any, id: string, left: number, top: number, textContent?: string, styles?: any): ComponentRef<{}> {
+    createComponent(component: any, id: string, left: number, top: number, styles?: any): ComponentRef<{}> {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(component);
         const componentRef = this.viewContainerRef.createComponent(componentFactory);
-        this.setStyle(componentRef, id, left, top, textContent, styles);
+        this.setStyle(componentRef, id, left, top, styles);
         return componentRef;
     }
 
-    setStyle(componentRef: ComponentRef<{}>, id: string, left: number, top: number, textContent?: string, styles?: any) {
+    setStyle(componentRef: ComponentRef<{}>, id: string, left: number, top: number, styles?: any) {
         componentRef.location.nativeElement.style.left = left + 'px';
         componentRef.location.nativeElement.style.top = top + 'px';
         componentRef.location.nativeElement.style.fontSize = '16px';
@@ -59,23 +61,26 @@ export class ComponentLoaderService {
             const comps = c.componentRef.instance['controlActive'] as ControlActiveDirective;
             comps.setInActive();
         });
+        this.store.dispatch(new SetInactiveAllControl());
     }
 
 
     moveControl(id: string, offsetX: number, offsetY: number) {
         const comp = this.getComponent(id);
-        const control = comp.componentRef.instance['control'] as ControlDirective;
-        const left = offsetX - control.offset.x;
-        const top = offsetY - control.offset.y;
-        comp.componentRef.location.nativeElement.style.left = left + 'px';
-        comp.componentRef.location.nativeElement.style.top = top + 'px';
-        this.store.dispatch(new MoveControl(id, left, top));
+        if (comp) {
+            const control = comp.componentRef.instance['control'] as ControlDirective;
+            const left = offsetX - control.offset.x;
+            const top = offsetY - control.offset.y;
+            comp.componentRef.location.nativeElement.style.left = left + 'px';
+            comp.componentRef.location.nativeElement.style.top = top + 'px';
+            this.store.dispatch(new MoveControl(id, left, top));
+        }
     }
 
     controlActive(controlId: string) {
-        this.store.dispatch(new ChangeControlActive(controlId));
         this.setControlInActiveAll();
         this.setControlActive(controlId);
+        this.store.dispatch(new ChangeControlActive(controlId));
     }
 
 
@@ -95,22 +100,21 @@ export class ComponentLoaderService {
     }
 
     keyboardUpdateComponent(offsetLeft: number, offsetTop: number) {
-        const componentActive = this.store.selectSnapshot((state) => {
-        //    return state;
-        console.log(state)
-            return state.reports.find(x => x.active === true).pages
-                .find(x => x.active === true).controls
-                .find(x => x.active === true)
-        });
-        console.log(componentActive);
-        const comp = this.getComponent(componentActive.id);
-        const control = comp.componentRef.instance['control'] as ControlDirective;
-        const style = comp.componentRef.location.nativeElement.style;
-        const left = parseFloat(style.left) + offsetLeft;
-        const top = parseFloat(style.top) + offsetTop;
-        style.left = left + 'px';
-        style.top = top + 'px';
-        this.store.dispatch(new MoveControl(componentActive.id, left, top));
-
+        // const componentActive = this.store.selectSnapshot((state) => {
+        //     return state.reports.find(x => x.active === true).pages
+        //         .find(x => x.active === true).controls
+        //         .find(x => x.active === true)
+        // });
+        const componentActive = this.reportStateService.getControlActive();
+        if (componentActive) {
+            const comp = this.getComponent(componentActive.id);
+            const control = comp.componentRef.instance['control'] as ControlDirective;
+            const style = comp.componentRef.location.nativeElement.style;
+            const left = parseFloat(style.left) + offsetLeft;
+            const top = parseFloat(style.top) + offsetTop;
+            style.left = left + 'px';
+            style.top = top + 'px';
+            this.store.dispatch(new MoveControl(componentActive.id, left, top));
+        }
     }
 }

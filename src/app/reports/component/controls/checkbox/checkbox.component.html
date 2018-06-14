@@ -2,5 +2,6 @@
 controlPosition 
 control-active
 [dndDraggable]="id" 
+[dndDisableIf]="!allowedDrag"
 [dndEffectAllowed]="'move'"
 [ngStyle]="getStyle()">Checked</mat-checkbox>

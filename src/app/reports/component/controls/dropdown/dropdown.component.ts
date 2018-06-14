@@ -1,23 +1,47 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ControlActiveDirective } from '../../../../share/directives/control-active.directive';
 import { ControlDirective } from '../../../../share/directives/control.directive';
+import { ReportStateService } from '../../../services/report-state.service';
 import { ControlDropdownStyle } from './../../../../core/models/controls/control-dropdown';
 
 @Component({
   selector: 'app-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss']
+  styleUrls: ['./dropdown.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent implements OnInit, OnDestroy {
+  allowedDrag = false;
+  @Input() actionSubscription$: Subscription;
   @Input() id: string;
   @Input() styles: ControlDropdownStyle;
   @ViewChild(ControlDirective) control: ControlDirective;
 
   @ViewChild(ControlActiveDirective) controlActive: ControlActiveDirective;
-  constructor() { }
+  constructor(private reportStateService: ReportStateService,
+    private cd: ChangeDetectorRef) { 
 
-  ngOnInit() {
-  }
+      
+    }
+
+    ngOnInit() {
+      this.actionSubscription$ = this.reportStateService.changeControlPage$.subscribe((control: any) => {
+        if (control && control.hasOwnProperty('id')) {
+          this.allowedDrag = (control.id === this.id) ? true : false;
+        } 
+        else {
+          this.allowedDrag = false;
+        }
+        this.cd.markForCheck();
+      })
+    }
+  
+    ngOnDestroy() {
+      if (this.actionSubscription$) {
+        this.actionSubscription$.unsubscribe();
+      }
+    }
 
   getStyle() {
     if (this.styles) {

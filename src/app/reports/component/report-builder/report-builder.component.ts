@@ -1,12 +1,13 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { Actions, ofActionSuccessful, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import * as jsPDF from 'jspdf';
 import { DndDropEvent } from 'ngx-drag-drop';
-import { Control } from '../../../core/models';
-import { AddControl, ChangeActivePage, ReportStateModel } from '../../../core/state mangement/states';
+import { Control } from '../../../core/models/control';
+import { AddControl, ReportStateModel } from '../../../core/state mangement/states/report.state';
 import { ControlHostDirective } from '../../../share/directives/control-host.directive';
 import { ControlService } from '../../services/control.service';
 import { ReportHeaderService } from '../../services/report-header.service';
+import { ReportStateService } from '../../services/report-state.service';
 import { ControlBase } from './../../../core/models/controls/control-base';
 import { ControlsState, ControlStateModel } from './../../../core/state mangement/states/control.state';
 import { ComponentLoaderService } from './../../../share/services/component-loader';
@@ -53,9 +54,9 @@ export class ReportBuilderComponent implements OnInit {
   }
 
   constructor(private store: Store,
-    private action$: Actions,
     private componentLoaderService: ComponentLoaderService,
     private controlService: ControlService,
+    private reportStateService: ReportStateService,
     private reportHeaderService: ReportHeaderService) { }
 
   ngOnInit() {
@@ -66,12 +67,12 @@ export class ReportBuilderComponent implements OnInit {
     this.componentLoaderService.setViewContainerRef(this.controlHost.viewContainerRef);
     this.renderPdf();
 
-    this.action$.pipe(
-      ofActionSuccessful(ChangeActivePage)
-    ).subscribe(payload => {
-      this.renderPdf();
-    })
 
+    this.reportStateService.changeActivePage$.subscribe(page => {
+      if (page) {
+        this.renderPdf();
+      }
+    });
   }
 
   renderPdf() {
@@ -93,7 +94,6 @@ export class ReportBuilderComponent implements OnInit {
       this.initialControls(pageActive.controls);
     }
   }
-
 
   pageRendered(e: CustomEvent) {
     const el = document.getElementsByClassName('pdfViewer')[0];
@@ -126,7 +126,8 @@ export class ReportBuilderComponent implements OnInit {
     if (comp) {
       const id = GUID.newGuid();
       const control: ControlBase<any> = this.controlService.getControl(comp.name);
-      this.componentLoaderService.createComponent(comp.component, id, event.event.offsetX, event.event.offsetY, comp.title, control.styles);
+
+      this.componentLoaderService.createComponent(comp.component, id, event.event.offsetX, event.event.offsetY, control.styles);
       this.componentLoaderService.controlActive(id);
       this.addControlPage(id, control, event.event.offsetX, event.event.offsetY, comp.title);
     }

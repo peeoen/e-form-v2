@@ -1,5 +1,10 @@
 import { State } from '@ngxs/store';
-import { CheckboxComponent, DropdownComponent, ImageComponent, LabelComponent, RadioComponent, TextComponent } from '../../../reports/component/controls/index';
+import { CheckboxComponent } from '../../../reports/component/controls/checkbox/checkbox.component';
+import { DropdownComponent } from '../../../reports/component/controls/dropdown/dropdown.component';
+import { ImageComponent } from '../../../reports/component/controls/image/image.component';
+import { LabelComponent } from '../../../reports/component/controls/label/label.component';
+import { RadioComponent } from '../../../reports/component/controls/radio/radio.component';
+import { TextComponent } from '../../../reports/component/controls/text/text.component';
 
 export interface ControlStateModel {
   icon: string;

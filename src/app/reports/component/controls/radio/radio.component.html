@@ -3,6 +3,7 @@ controlPosition
 control-active 
 [dndDraggable]="id" 
 [dndEffectAllowed]="'move'" 
+[dndDisableIf]="!allowedDrag"
 class="control-radio"
 [ngStyle]="getStyle()">
   <mat-radio-button [style.fontFamily]="styles.fontFamily">

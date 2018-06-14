@@ -1,5 +1,6 @@
-import { Page } from "../../models";
-import { ReportStateModel } from "../states";
+import { Page } from "../../models/page";
+import { ReportStateModel } from "../states/report.state";
+
 
 const initalPage = new Page(1);
 initalPage.imagePreview = 'assets/pages-preview/a4.png';
