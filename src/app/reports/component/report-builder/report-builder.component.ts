@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngxs/store';
 import * as jsPDF from 'jspdf';
 import { DndDropEvent } from 'ngx-drag-drop';
@@ -19,14 +19,15 @@ import { GUID } from './../../../utility/guid';
   templateUrl: './report-builder.component.html',
   styleUrls: ['./report-builder.component.scss']
 })
-export class ReportBuilderComponent implements OnInit {
+export class ReportBuilderComponent implements OnInit, OnDestroy  {
   screen = {
     width: null,
     height: null
   };
   pdfSrc: string;
   controls: ControlStateModel[];
-
+  cursor= true;
+  subScription: any;
   @ViewChild(ControlHostDirective) controlHost: ControlHostDirective;
 
   @HostListener('window:keydown', ['$event'])
@@ -60,6 +61,9 @@ export class ReportBuilderComponent implements OnInit {
     private reportHeaderService: ReportHeaderService) { }
 
   ngOnInit() {
+    this.subScription = setInterval(() => {
+      this.cursor = !this.cursor;
+    }, 500)
     this.reportHeaderService.selectStyle.subscribe(s => {
       console.log(s);
     });
@@ -73,6 +77,10 @@ export class ReportBuilderComponent implements OnInit {
         this.renderPdf();
       }
     });
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.subScription);
   }
 
   renderPdf() {

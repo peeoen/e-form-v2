@@ -52,7 +52,7 @@ export class TextComponent implements OnInit, OnDestroy  {
         'font-style': (this.styles.italic) ? 'italic': 'normal' || '',
         'text-decoration': (this.styles.underline) ? 'underline': 'normal' || '',
         'text-align': this.styles.alignment || '',
-        'width': this.styles.width || '',
+        'width': this.styles.width || '150px',
       }
       return styles;
     }

@@ -5,7 +5,7 @@ import { ControlDirective } from '../../../../share/directives/control.directive
 import { ReportStateService } from '../../../services/report-state.service';
 import { ControlRadioStyle } from './../../../../core/models/controls/control-radio';
 @Component({
-  selector: '[app-radio]',
+  selector: 'app-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

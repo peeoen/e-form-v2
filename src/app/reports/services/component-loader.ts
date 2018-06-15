@@ -38,7 +38,7 @@ export class ComponentLoaderService {
         componentRef.location.nativeElement.style.left = left + 'px';
         componentRef.location.nativeElement.style.top = top + 'px';
         componentRef.location.nativeElement.style.fontSize = '16px';
-        componentRef.location.nativeElement.style.position = 'absolute';
+        // componentRef.location.nativeElement.style.position = 'absolute';
         componentRef.instance['id'] = id;
         componentRef.instance['styles'] = styles;
 

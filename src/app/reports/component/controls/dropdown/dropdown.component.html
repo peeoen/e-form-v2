@@ -8,7 +8,8 @@ mat-button
 [dndEffectAllowed]="'move'"
 (dblclick)="dbclick()"
 (click)="clickMenu()"
-[ngStyle]="getStyle()">Dropdown</button>
+[ngStyle]="getStyle()"
+class="d-inline">Dropdown</button>
 
 <mat-menu #menu="matMenu">
   <button mat-menu-item>Item 1</button>
