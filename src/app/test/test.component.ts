@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 declare var $: any;
+
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -21,10 +22,11 @@ export class TestComponent implements OnInit {
       charCounterCount: false,
       toolbarButtons: [
         'fontFamily', '|', 'fontSize', '|',
-        'bold', 'italic', 'underline', '|',
+        'color', '|',
+        'bold', 'italic', 'underline', 'subscript', 'superscript', '|',
         'align', 'verticalAlign', '|',
         'formatOL', 'formatUL', 'indent', 'outdent', '|',
-        'insertImage', '|',
+        'insertHR', 'specialCharacters', 'insertTable', 'insertImage','|',
         'undo', 'redo', 'help'
       ]
     })

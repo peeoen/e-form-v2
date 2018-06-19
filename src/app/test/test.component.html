@@ -1,10 +1,12 @@
-<div style="width:1200px;height:600px;margin: 0 auto;">
-    <div id="froala-editor" [froalaEditor] [(froalaModel)]="htmlContent">
-        <h3>Click here to edit the content</h3>
-        <p><img id="edit" class="fr-fil fr-dib" src="http://via.placeholder.com/350x150" alt="Old Clock" width="300"/></p>
-        <p>The image can be dragged only between blocks and not inside them.</p>
-      </div>
-    
+<div style="width:1200px;height:650px;margin: 0 auto;">
+  <div id="froala-editor" [froalaEditor] [(froalaModel)]="htmlContent">
+    <h3>Click here to edit the content</h3>
+    <p>
+      <img id="edit" class="fr-fil fr-dib" src="http://via.placeholder.com/350x150" alt="Old Clock" width="300" />
+    </p>
+    <p>The image can be dragged only between blocks and not inside them.</p>
+  </div>
 </div>
-
-  {{htmlContent}}
+<div>
+    {{htmlContent}}
+</div>
